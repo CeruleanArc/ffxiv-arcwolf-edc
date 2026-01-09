@@ -50,16 +50,15 @@ h1 {
 }
 
 .title-brand {
-  font-size: 3.8rem; /* Largest: The Hero Line */
+  font-size: 3.5rem; /* Largest: The Hero Line */
   font-weight: 700;
   white-space: nowrap; /* Forces one line */
-  text-transform: uppercase;
   letter-spacing: 2px;
 }
 
 .title-app {
-  font-size: 1.8rem; /* Middlest: Between 'The' and 'Brand' */
-  font-weight: 400;
+  font-size: 2rem; /* Middlest: Between 'The' and 'Brand' */
+  font-weight: 500;
   white-space: nowrap; /* Forces one line */
   color: #a0c0ff; /* Subtle blue shift to differentiate */
 }
