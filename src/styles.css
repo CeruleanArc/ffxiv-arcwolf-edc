@@ -44,7 +44,8 @@ h1 {
   display: flex;
   gap: 20px;
   max-width: 900px;
-  width: 95%;
+  width: 90%; /* Increased gutter for breathing room */
+  margin: 0 auto; /* Centers the container */
 }
 
 .converter-box {
@@ -142,21 +143,28 @@ h1 {
   white-space: nowrap;
 }
 
-/* Mobile Responsiveness */
 @media (max-width: 768px) {
   .main-container {
-    flex-direction: column; /* Stacks the sidebar below the main box */
+    flex-direction: column;
     align-items: center;
-    gap: 15px;
-    padding-bottom: 80px; /* Space so the footer doesn't cover the content */
+    gap: 30px; /* Increased gap between the two boxes */
+    padding-bottom: 120px; /* Ensures clearance for the fixed footer */
+    width: 92%; /* Specific width for mobile screens */
   }
 
-  .converter-box, .era-sidebar {
-    width: 100%; /* Ensures they take up the full width of the phone screen */
+  .converter-box {
+    padding: 30px 20px; /* Reduced internal padding to save vertical space */
+  }
+
+  .era-sidebar {
+    width: 100%;
     flex: none;
+    padding: 25px; /* Comfortable padding for the text */
+    margin-bottom: 40px; /* Extra buffer before the footer area starts */
   }
 
   h1 {
-    font-size: 1.8rem; /* Scales the title down for small screens */
+    font-size: 1.6rem; /* Slightly smaller to prevent text wrapping issues */
+    line-height: 2.2rem;
   }
 }
