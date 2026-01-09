@@ -33,6 +33,25 @@ function getEorzeanDate(earthDate) {
   const aughtStart = new Date(2013, 7, 27);
   const yearEnd = new Date(2013, 11, 31);
 
+  // ACCORD NEXUS PROTOCOL: Block years before 6th Astral Era (approx. 436 AD)
+  // 2007 (Year 1572:6AE) - 1572 = Year 435. Any date before Jan 1, 436 is blocked.
+  if (year < 436) {
+    document.getElementById("output").classList.add("denied");
+    return `
+      <div class="denied-message">
+        ACCESS DENIED BY ORDER OF THE ACCORD NEXUS.<br>
+        CHOOSE A DATE WITHIN YOUR REGISTERED TRANSTEMPORAL RANGE OR RISK EXISTENTIAL ABLATION.
+      </div>
+    `;
+  }
+
+  // Remove the denied class if the date is valid
+  document.getElementById("output").classList.remove("denied");
+
+  const month = earthDate.getMonth();
+  const day = earthDate.getDate();
+  const localDate = new Date(year, month, day);
+
   if (localDate >= aughtStart && localDate <= yearEnd) {
     // Calculate total milliseconds and convert to whole days
     const diffTime = localDate.getTime() - aughtStart.getTime();
@@ -84,17 +103,15 @@ function formatEorzean(totalSuns, year, era) {
   const list = moonIdx % 2 === 0 ? ASTRAL_MOONS : UMBRAL_MOONS;
   const moonName = list[Math.floor(moonIdx / 2)];
 
-  // ERA MAPPING PROTOCOL
   const eraNames = {
     "7AE": "7th Astral Era",
     "7UE": "7th Umbral Era",
     "6AE": "6th Astral Era"
   };
-  const eraFullName = eraNames[era] || "7th Astral Era";
 
   return `
     <div class="output-sun">${getOrdinal(sun)} Sun of the ${moonName}</div>
-    <div class="output-year">Year ${year} of the ${eraFullName}</div>
+    <div class="output-year">Year ${year} of the ${eraNames[era] || era}</div>
   `;
 }
 
