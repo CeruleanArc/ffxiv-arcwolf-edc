@@ -141,3 +141,22 @@ h1 {
   font-weight: bold;
   white-space: nowrap;
 }
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .main-container {
+    flex-direction: column; /* Stacks the sidebar below the main box */
+    align-items: center;
+    gap: 15px;
+    padding-bottom: 80px; /* Space so the footer doesn't cover the content */
+  }
+
+  .converter-box, .era-sidebar {
+    width: 100%; /* Ensures they take up the full width of the phone screen */
+    flex: none;
+  }
+
+  h1 {
+    font-size: 1.8rem; /* Scales the title down for small screens */
+  }
+}
