@@ -22,7 +22,7 @@ function getEorzeanDate(earthDate) {
   const localDate = new Date(year, month, day);
 
 // ACCORD NEXUS PROTOCOL
-  if (year < 436) {
+  if (year < 435) {
     document.getElementById("output").classList.add("denied");
     return `
       <div class="denied-message">
@@ -128,7 +128,7 @@ document.getElementById("dateInput").addEventListener("change", (e) => {
   const [y, m, d] = e.target.value.split("-").map(Number);
   const date = new Date(y, m - 1, d);
   
-  // SURGICAL FORCE: Ensures year 56 stays year 56, not 1956
+  // SURGICAL FORCE: Prevents 2-digit years from mapping to the 1900s
   date.setFullYear(y); 
   
   document.getElementById("output").innerHTML = getEorzeanDate(date);

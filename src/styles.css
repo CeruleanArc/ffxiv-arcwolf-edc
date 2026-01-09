@@ -242,26 +242,25 @@ h1 {
   animation: pulse-red 2s infinite;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: center; /* Centering for Line 2 */
 }
 
 .denied-l1 {
-  font-size: 1.1rem; /* The Anchor */
+  font-size: 1.1rem;
   font-weight: 700;
-  text-transform: uppercase;
+  text-transform: uppercase; /* L1 is CAP anchor */
 }
 
 .denied-l2 {
-  font-size: 2.5rem; /* Largest and Centered */
+  font-size: 2.5rem; /* Largest centered element */
   font-weight: 700;
   margin: 5px 0;
 }
 
 .denied-l3 {
-  font-size: 1rem; /* Slightly smaller than L1 */
-  font-weight: 400; /* Less weight */
+  font-size: 1rem;
+  font-weight: 400; /* Lighter weight as requested */
   margin-top: 10px;
-  text-transform: none; /* Normal casing */
 }
 
 @media (max-width: 768px) {
