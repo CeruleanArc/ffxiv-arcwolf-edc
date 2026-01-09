@@ -2,12 +2,11 @@ body {
   margin: 0;
   display: flex;
   justify-content: center;
-  align-items: center;
+  /* Change this to flex-start so content starts at the top */
+  align-items: flex-start; 
   min-height: 100vh;
   color: #e0e0ff;
   font-family: "Cinzel", serif;
-
-  /* The Background Logic */
   background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
     url("https://substackcdn.com/image/fetch/$s_!naXD!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F56ea8537-871d-48bd-b53d-9525bdbe9775_3840x2160.png");
   background-position: center;
@@ -44,8 +43,8 @@ h1 {
   display: flex;
   gap: 20px;
   max-width: 900px;
-  width: 92%; /* Creates a 4% gutter on each side */
-  margin: 0 auto; /* Physically centers the boxes on the screen */
+  width: 90%; /* Creates healthy side gutters */
+  margin: 40px auto 120px auto; /* Adds top margin and bottom buffer for footer */
 }
 
 .converter-box {
@@ -145,18 +144,29 @@ h1 {
 
 @media (max-width: 768px) {
   .main-container {
-    flex-direction: column; /* Keeps the stacking you requested */
-    gap: 30px; /* Adds vertical breathing room between the two boxes */
-    padding-bottom: 140px; /* Ensures the Taper footer doesn't overlap the text */
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    margin-top: 20px; /* Slimmer top margin for mobile screens */
+    width: 92%; /* Maximizes space without touching the glass */
   }
 
-  .converter-box, .era-sidebar {
-    padding: 20px; /* Prevents text from touching the inner edges of the boxes */
+  .converter-box {
+    padding: 30px 15px; /* Keeps internal text away from box edges */
     width: 100%;
-    box-sizing: border-box; /* Force padding to stay INSIDE the width */
+    box-sizing: border-box;
+  }
+
+  .era-sidebar {
+    width: 100%;
+    flex: none;
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: left;
   }
 
   h1 {
-    font-size: 1.6rem; /* Scales title to fit mobile widths comfortably */
+    font-size: 1.6rem;
+    line-height: 2.2rem;
   }
 }
