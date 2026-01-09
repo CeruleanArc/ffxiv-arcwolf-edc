@@ -82,11 +82,12 @@ function formatEorzean(totalSuns, year, era) {
   const moonIdx = Math.floor((totalSuns - 1) / 32);
   const sun = ((totalSuns - 1) % 32) + 1;
   const list = moonIdx % 2 === 0 ? ASTRAL_MOONS : UMBRAL_MOONS;
-// Example result: 31st Sun of the 6th Umbral Moon
-  //                 Year 12 of the 7th Astral Era
+  const moonName = list[Math.floor(moonIdx / 2)];
+
+  // Surgical Fix: Using 'sun' and 'year' variables correctly
   return `
-    <div class="output-sun">${getOrdinal(eDay)} Sun of the ${moonName}</div>
-    <div class="output-year">Year ${eYear} of the 7th Astral Era</div>
+    <div class="output-sun">${getOrdinal(sun)} Sun of the ${moonName}</div>
+    <div class="output-year">Year ${year} of the 7th Astral Era</div>
   `;
 }
 
@@ -122,9 +123,9 @@ app.innerHTML = `
   `; // This backtick MUST be here to close the UI section.
 
 // --- SECTION 2: THE LOGIC LISTENER ---
-// Ensure this is OUTSIDE and AFTER the backtick above.
 document.getElementById("dateInput").addEventListener("change", (e) => {
   const [y, m, d] = e.target.value.split("-").map(Number);
   const date = new Date(y, m - 1, d);
-  document.getElementById("output").innerText = getEorzeanDate(date);
+  // Surgical Fix: Use innerHTML to allow the tiered <div> formatting
+  document.getElementById("output").innerHTML = getEorzeanDate(date);
 });
