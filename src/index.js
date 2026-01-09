@@ -127,5 +127,9 @@ app.innerHTML = `
 document.getElementById("dateInput").addEventListener("change", (e) => {
   const [y, m, d] = e.target.value.split("-").map(Number);
   const date = new Date(y, m - 1, d);
+  
+  // SURGICAL FORCE: Ensures year 56 stays year 56, not 1956
+  date.setFullYear(y); 
+  
   document.getElementById("output").innerHTML = getEorzeanDate(date);
 });
