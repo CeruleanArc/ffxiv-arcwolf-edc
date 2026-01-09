@@ -21,13 +21,14 @@ function getEorzeanDate(earthDate) {
   const day = earthDate.getDate();
   const localDate = new Date(year, month, day);
 
-  // ACCORD NEXUS PROTOCOL
+// ACCORD NEXUS PROTOCOL
   if (year < 436) {
     document.getElementById("output").classList.add("denied");
     return `
       <div class="denied-message">
-        ACCESS DENIED BY ORDER OF THE ACCORD NEXUS.<br>
-        CHOOSE A DATE WITHIN YOUR REGISTERED TRANSTEMPORAL RANGE OR RISK EXISTENTIAL ABLATION.
+        <div class="denied-l1">ACCESS DENIED BY ORDER OF THE</div>
+        <div class="denied-l2">Accord Nexus</div>
+        <div class="denied-l3">Choose a date within your registered transtemporal range or risk existential ablation.</div>
       </div>
     `;
   }
