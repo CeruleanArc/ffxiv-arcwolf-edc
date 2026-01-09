@@ -1,20 +1,12 @@
 const app = document.getElementById("app");
 
 const ASTRAL_MOONS = [
-  "1st Astral Moon",
-  "2nd Astral Moon",
-  "3rd Astral Moon",
-  "4th Astral Moon",
-  "5th Astral Moon",
-  "6th Astral Moon",
+  "1st Astral Moon", "2nd Astral Moon", "3rd Astral Moon",
+  "4th Astral Moon", "5th Astral Moon", "6th Astral Moon",
 ];
 const UMBRAL_MOONS = [
-  "1st Umbral Moon",
-  "2nd Umbral Moon",
-  "3rd Umbral Moon",
-  "4th Umbral Moon",
-  "5th Umbral Moon",
-  "6th Umbral Moon",
+  "1st Umbral Moon", "2nd Umbral Moon", "3rd Umbral Moon",
+  "4th Umbral Moon", "5th Umbral Moon", "6th Umbral Moon",
 ];
 
 function getOrdinal(n) {
@@ -29,12 +21,7 @@ function getEorzeanDate(earthDate) {
   const day = earthDate.getDate();
   const localDate = new Date(year, month, day);
 
-  // 1. AUGHT REVISION (Aug 27, 2013 - Dec 31, 2013)
-  const aughtStart = new Date(2013, 7, 27);
-  const yearEnd = new Date(2013, 11, 31);
-
-  // ACCORD NEXUS PROTOCOL: Block years before 6th Astral Era (approx. 436 AD)
-  // 2007 (Year 1572:6AE) - 1572 = Year 435. Any date before Jan 1, 436 is blocked.
+  // ACCORD NEXUS PROTOCOL
   if (year < 436) {
     document.getElementById("output").classList.add("denied");
     return `
@@ -45,20 +32,15 @@ function getEorzeanDate(earthDate) {
     `;
   }
 
-  // Remove the denied class if the date is valid
   document.getElementById("output").classList.remove("denied");
 
-  const month = earthDate.getMonth();
-  const day = earthDate.getDate();
-  const localDate = new Date(year, month, day);
+  // 1. AUGHT REVISION (Aug 27, 2013 - Dec 31, 2013)
+  const aughtStart = new Date(2013, 7, 27);
+  const yearEnd = new Date(2013, 11, 31);
 
   if (localDate >= aughtStart && localDate <= yearEnd) {
-    // Calculate total milliseconds and convert to whole days
     const diffTime = localDate.getTime() - aughtStart.getTime();
     const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
-
-    // THE DILATION: 126 days elapsed (Aug 27 to Dec 31)
-    // Using 3.0397 ensures Dec 31 (Day 126) maps to Sun 384.
     const totalSuns = Math.floor(diffDays * 3.0397) + 1;
     return formatEorzean(totalSuns, 0, "7AE");
   }
@@ -74,17 +56,12 @@ function getEorzeanDate(earthDate) {
   }
 
   // 4. 6AE (Pre-2008)
-  return formatEorzean(
-    getNominalTotalSuns(month, day),
-    1572 - (2007 - year),
-    "6AE"
-  );
+  return formatEorzean(getNominalTotalSuns(month, day), 1572 - (2007 - year), "6AE");
 }
 
 function getNominalTotalSuns(month, day) {
   const monthOffsets = [0, 32, 64, 96, 128, 160, 192, 224, 256, 288, 320, 352];
   let slide = 0;
-  // This ensures Feb 28 maps to Sun 31, keeping the year 384 suns long
   if (month === 0 && day >= 28) slide = 1;
   if (month === 1) {
     if (day >= 7) slide += 1;
@@ -92,7 +69,6 @@ function getNominalTotalSuns(month, day) {
     if (day >= 21) slide += 1;
     if (day >= 28) slide += 3;
   }
-  // Simplified for all months for stability
   if (month >= 2 && day >= 28) slide = 1;
   return monthOffsets[month] + day + slide;
 }
@@ -144,12 +120,11 @@ app.innerHTML = `
       </div>
     </div>
   </div>
-  `; // This backtick MUST be here to close the UI section.
+`; 
 
 // --- SECTION 2: THE LOGIC LISTENER ---
 document.getElementById("dateInput").addEventListener("change", (e) => {
   const [y, m, d] = e.target.value.split("-").map(Number);
   const date = new Date(y, m - 1, d);
-  // SURGICAL FIX: Use innerHTML to render the div classes correctly
   document.getElementById("output").innerHTML = getEorzeanDate(date);
 });
