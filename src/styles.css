@@ -117,9 +117,32 @@ h1 {
 }
 
 #output {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  line-height: 1.4;
+}
+
+.output-sun {
   font-size: 1.6rem;
-  font-weight: bold;
-  text-shadow: 0 0 10px rgba(100, 200, 255, 0.5);
+  color: #e0e0ff;
+}
+
+.output-year {
+  font-size: 1.2rem;
+  color: #a0c0ff; /* Subtle blue shift for the year line */
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Mobile Scaling */
+@media (max-width: 768px) {
+  .output-sun {
+    font-size: 1.3rem;
+  }
+  .output-year {
+    font-size: 1rem;
+  }
 }
 
 /* Inside styles.css */

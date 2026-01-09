@@ -17,6 +17,12 @@ const UMBRAL_MOONS = [
   "6th Umbral Moon",
 ];
 
+function getOrdinal(n) {
+  const s = ["th", "st", "nd", "rd"];
+  const v = n % 100;
+  return n + (s[(v - 20) % 10] || s[v] || s[0]);
+}
+
 function getEorzeanDate(earthDate) {
   const year = earthDate.getFullYear();
   const month = earthDate.getMonth();
@@ -76,9 +82,12 @@ function formatEorzean(totalSuns, year, era) {
   const moonIdx = Math.floor((totalSuns - 1) / 32);
   const sun = ((totalSuns - 1) % 32) + 1;
   const list = moonIdx % 2 === 0 ? ASTRAL_MOONS : UMBRAL_MOONS;
-  return `${sun} Sun, ${
-    list[Math.floor(moonIdx / 2)]
-  }, Year ${year} of  ${era}`;
+// Example result: 31st Sun of the 6th Umbral Moon
+  //                 Year 12 of the 7th Astral Era
+  return `
+    <div class="output-sun">${getOrdinal(eDay)} Sun of the ${moonName}</div>
+    <div class="output-year">Year ${eYear} of the 7th Astral Era</div>
+  `;
 }
 
 // --- SECTION 1: THE UI RENDER ---
