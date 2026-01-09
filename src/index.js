@@ -1,3 +1,5 @@
+const app = document.getElementById("app");
+
 const ASTRAL_MOONS = [
   "1st Astral Moon",
   "2nd Astral Moon",
@@ -15,7 +17,7 @@ const UMBRAL_MOONS = [
   "6th Umbral Moon",
 ];
 
-function getEorzeanDate(earthDate: Date) {
+function getEorzeanDate(earthDate) {
   const year = earthDate.getFullYear();
   const month = earthDate.getMonth();
   const day = earthDate.getDate();
@@ -54,7 +56,7 @@ function getEorzeanDate(earthDate: Date) {
   );
 }
 
-function getNominalTotalSuns(month: number, day: number): number {
+function getNominalTotalSuns(month, day) {
   const monthOffsets = [0, 32, 64, 96, 128, 160, 192, 224, 256, 288, 320, 352];
   let slide = 0;
   // This ensures Feb 28 maps to Sun 31, keeping the year 384 suns long
@@ -70,7 +72,7 @@ function getNominalTotalSuns(month: number, day: number): number {
   return monthOffsets[month] + day + slide;
 }
 
-function formatEorzean(totalSuns: number, year: number, era: string) {
+function formatEorzean(totalSuns, year, era) {
   const moonIdx = Math.floor((totalSuns - 1) / 32);
   const sun = ((totalSuns - 1) % 32) + 1;
   const list = moonIdx % 2 === 0 ? ASTRAL_MOONS : UMBRAL_MOONS;
@@ -110,8 +112,8 @@ app.innerHTML = `
 
 // --- SECTION 2: THE LOGIC LISTENER ---
 // Ensure this is OUTSIDE and AFTER the backtick above.
-document.getElementById("dateInput")!.addEventListener("change", (e: any) => {
+document.getElementById("dateInput").addEventListener("change", (e) => {
   const [y, m, d] = e.target.value.split("-").map(Number);
   const date = new Date(y, m - 1, d);
-  document.getElementById("output")!.innerText = getEorzeanDate(date);
+  document.getElementById("output").innerText = getEorzeanDate(date);
 });
