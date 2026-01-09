@@ -44,8 +44,8 @@ h1 {
   display: flex;
   gap: 20px;
   max-width: 900px;
-  width: 90%; /* Increased gutter for breathing room */
-  margin: 0 auto; /* Centers the container */
+  width: 92%; /* Creates a 4% gutter on each side */
+  margin: 0 auto; /* Physically centers the boxes on the screen */
 }
 
 .converter-box {
@@ -145,26 +145,18 @@ h1 {
 
 @media (max-width: 768px) {
   .main-container {
-    flex-direction: column;
-    align-items: center;
-    gap: 30px; /* Increased gap between the two boxes */
-    padding-bottom: 120px; /* Ensures clearance for the fixed footer */
-    width: 92%; /* Specific width for mobile screens */
+    flex-direction: column; /* Keeps the stacking you requested */
+    gap: 30px; /* Adds vertical breathing room between the two boxes */
+    padding-bottom: 140px; /* Ensures the Taper footer doesn't overlap the text */
   }
 
-  .converter-box {
-    padding: 30px 20px; /* Reduced internal padding to save vertical space */
-  }
-
-  .era-sidebar {
+  .converter-box, .era-sidebar {
+    padding: 20px; /* Prevents text from touching the inner edges of the boxes */
     width: 100%;
-    flex: none;
-    padding: 25px; /* Comfortable padding for the text */
-    margin-bottom: 40px; /* Extra buffer before the footer area starts */
+    box-sizing: border-box; /* Force padding to stay INSIDE the width */
   }
 
   h1 {
-    font-size: 1.6rem; /* Slightly smaller to prevent text wrapping issues */
-    line-height: 2.2rem;
+    font-size: 1.6rem; /* Scales title to fit mobile widths comfortably */
   }
 }
