@@ -35,8 +35,46 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     brightness(110%);
 }
 
+/* --- Tiered Header Hierarchy --- */
 h1 {
-  line-height: 2.6rem;
+  line-height: 1.1; /* Tighter spacing for the tiered look */
+  margin-top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title-the {
+  font-size: 1.2rem; /* Smallest: Leave as-is anchor */
+  font-weight: 400;
+}
+
+.title-brand {
+  font-size: 3.8rem; /* Largest: The Hero Line */
+  font-weight: 700;
+  white-space: nowrap; /* Forces one line */
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.title-app {
+  font-size: 1.8rem; /* Middlest: Between 'The' and 'Brand' */
+  font-weight: 400;
+  white-space: nowrap; /* Forces one line */
+  color: #a0c0ff; /* Subtle blue shift to differentiate */
+}
+
+/* Mobile Scaling for One-Line Integrity */
+@media (max-width: 768px) {
+  .title-brand {
+    font-size: 2.4rem; /* Scaled down to fit mobile width */
+  }
+  .title-app {
+    font-size: 1.2rem;
+  }
+  .title-the {
+    font-size: 0.9rem;
+  }
 }
 
 .main-container {

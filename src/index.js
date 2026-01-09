@@ -85,11 +85,13 @@ function formatEorzean(totalSuns, year, era) {
 app.innerHTML = `
   <div class="main-container">
     <div class="converter-box">
-      <h1>The<br />
-        <span style="font-size: 2.8rem;">FFXIV-Arcwolf</span><br />
-        Eorzean Date Converter</h1>
+      <h1>
+        <span class="title-the">The</span>
+        <span class="title-brand">FFXIV-Arcwolf</span>
+        <span class="title-app">Eorzean Date Converter</span>
+      </h1>
       <input type="date" id="dateInput">
-      <div id="output">Choose an Earth calendar date to begin.</div>
+      <div id="output">Choose an Earth calendar date to begin</div>
     </div>
     
     <div class="era-sidebar">
