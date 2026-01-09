@@ -1,0 +1,143 @@
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  color: #e0e0ff;
+  font-family: "Cinzel", serif;
+
+  /* The Background Logic */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+    url("https://substackcdn.com/image/fetch/$s_!naXD!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F56ea8537-871d-48bd-b53d-9525bdbe9775_3840x2160.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+input[type="date"] {
+  background: #0f0f1f;
+  color: #fff;
+  border: 1px solid #4e4e8e;
+  padding: 10px;
+  border-radius: 4px;
+  /* This forces the browser's calendar icon to match your blue output */
+  color-scheme: dark;
+  accent-color: #a0c0ff;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+/* Specifically targeting the calendar icon's filter for the blue glow */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  filter: invert(80%) sepia(20%) saturate(1000%) hue-rotate(180deg)
+    brightness(110%);
+}
+
+h1 {
+  line-height: 2.6rem;
+}
+
+.main-container {
+  display: flex;
+  gap: 20px;
+  max-width: 900px;
+  width: 95%;
+}
+
+.converter-box {
+  flex: 2;
+  background: rgba(20, 20, 40, 0.9);
+  padding: 40px;
+  border: 1px solid #4e4e8e;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(0, 100, 255, 0.2);
+}
+
+.era-sidebar {
+  flex: 1;
+  background: rgba(15, 15, 30, 0.8);
+  padding: 20px;
+  border: 1px solid #333;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  text-align: left;
+}
+
+.era-item {
+  margin-bottom: 15px;
+  border-bottom: 1px solid #222;
+  padding-bottom: 10px;
+}
+
+.era-item strong {
+  color: #a0c0ff;
+  display: block;
+  margin-bottom: 5px;
+}
+
+#output {
+  font-size: 1.6rem;
+  font-weight: bold;
+  text-shadow: 0 0 10px rgba(100, 200, 255, 0.5);
+}
+
+/* Inside styles.css */
+.taper-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 12px 30px;
+  background: rgba(13, 13, 26, 0.95);
+  border-top: 1px solid #a0c0ff; /* This is your solid, crisp line */
+  font-family: "Courier New", monospace;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  color: #e0e0ff;
+  z-index: 100;
+  display: grid;
+  /* FIX: 1fr pushes everything to the edges, auto keeps labels compact */
+  grid-template-columns: auto auto auto 1fr auto;
+  gap: 50px; /* Reduced gap to stop pushing EXE too far */
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-content {
+  display: contents;
+}
+
+/* Specific alignment to mirror the Taper Project site */
+.taper-footer span:nth-child(1) {
+  text-align: left;
+}
+.taper-footer span:nth-child(2) {
+  text-align: left;
+}
+.taper-footer span:nth-child(3) {
+  text-align: center;
+}
+.taper-footer span:nth-child(4) {
+  text-align: right;
+}
+
+.taper-footer a {
+  color: #a0c0ff;
+  text-decoration: none;
+  border-bottom: 1px dotted #a0c0ff;
+}
+
+.taper-footer a:hover {
+  background: #a0c0ff;
+  color: #0d0d1a;
+}
+
+.support-links {
+  text-align: center;
+  font-weight: bold;
+  white-space: nowrap;
+}
