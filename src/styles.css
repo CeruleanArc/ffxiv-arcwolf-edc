@@ -147,30 +147,37 @@ h1 {
   }
 }
 
-/* Inside styles.css */
+/* --- TAPER FOOTER RECONSTRUCTION --- */
 .taper-footer {
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
-  padding: 12px 30px;
+  padding: 12px 20px; /* Reduced side padding for mobile */
   background: rgba(13, 13, 26, 0.95);
-  border-top: 1px solid #a0c0ff; /* This is your solid, crisp line */
+  border-top: 1px solid #a0c0ff;
   font-family: "Courier New", monospace;
-  font-size: 0.75rem;
+  font-size: 0.7rem; /* Slightly smaller for density */
   letter-spacing: 1px;
   color: #e0e0ff;
-  z-index: 100;
-  display: grid;
-  /* FIX: 1fr pushes everything to the edges, auto keeps labels compact */
-  grid-template-columns: auto auto auto 1fr auto;
-  gap: 50px; /* Reduced gap to stop pushing EXE too far */
+  z-index: 1000;
+  
+  /* Flexbox allows items to flow and wrap */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
+  gap: 15px;
+  box-sizing: border-box;
 }
 
 .footer-content {
   display: contents;
+}
+
+/* Ensure the EXE and REF anchors stay distinct */
+.taper-footer span {
+  white-space: nowrap;
 }
 
 /* Specific alignment to mirror the Taper Project site */
@@ -203,14 +210,25 @@ h1 {
   font-weight: bold;
   white-space: nowrap;
 }
-
 @media (max-width: 768px) {
+  .taper-footer {
+    justify-content: center; /* Centers items when they stack */
+    text-align: center;
+    padding: 15px;
+  }
+  
+  .taper-footer span {
+    width: 100%; /* Forces items onto new lines if needed */
+    margin-bottom: 5px;
+  }
+
   .main-container {
     flex-direction: column;
     align-items: center;
     gap: 30px;
     margin-top: 20px;
     width: 92%;
+    margin-bottom: 180px; 
   }
 
 .converter-box {

@@ -122,9 +122,9 @@ app.innerHTML = `
       </h1>
       <input type="date" id="dateInput">
       <div id="output">Choose an Earth calendar date to begin</div>
-          <div class="timeline-box" id="timelineBox" style="display: none;">
-  <h3>This Year in Eorzea</h3>
-  <div id="timeline-event"></div>
+<div class="timeline-box" id="timelineBox" style="display: none;">
+    <h3>This Year in Eorzea</h3>
+    <div id="timeline-event"></div>
 </div>
     </div>
     
