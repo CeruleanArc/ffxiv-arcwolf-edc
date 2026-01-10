@@ -34,13 +34,22 @@ function getOrdinal(n) {
   return n + (s[(v - 20) % 10] || s[v] || s[0]);
 }
 
+// Helper to get Moon and Sun data from a raw total
+function getDateComponents(totalSuns) {
+  const moonIdx = Math.floor((totalSuns - 1) / 32);
+  const sun = ((totalSuns - 1) % 32) + 1;
+  const list = moonIdx % 2 === 0 ? ASTRAL_MOONS : UMBRAL_MOONS;
+  const moonName = list[Math.floor(moonIdx / 2)];
+  return { sun, moonName };
+}
+
 function getEorzeanDate(earthDate) {
   const year = earthDate.getFullYear();
   const month = earthDate.getMonth();
-  const day = earthDate.getDate();
+  const day = earthDate.getDate(); // 1-31
   const localDate = new Date(year, month, day);
 
-// ACCORD NEXUS PROTOCOL
+  // ACCORD NEXUS PROTOCOL
   if (year < 435) {
     document.getElementById("output").classList.add("denied");
     return `
@@ -61,52 +70,90 @@ function getEorzeanDate(earthDate) {
   if (localDate >= aughtStart && localDate <= yearEnd) {
     const diffTime = localDate.getTime() - aughtStart.getTime();
     const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
+    // Aught Revision is highly compressed, so we stick to the primary calculated date for clarity
     const totalSuns = Math.floor(diffDays * 3.0397) + 1;
     return formatEorzean(totalSuns, 0, "7AE");
   }
 
+  // STANDARD MAPPING LOGIC (Used for 7AE, 7UE, 6AE)
+  let currentSuns = getNominalTotalSuns(month, day);
+  let prevSuns = getNominalTotalSuns(month, day - 1); 
+  
+  // Detect if we skipped suns (The "Double Date" Logic)
+  // Logic: If today is Sun 30, and yesterday was Sun 28, then today represents Sun 29 AND 30.
+  // Note: We use day-1. For the 1st of the month, this relies on getNominalTotalSuns handling day=0 correctly (it returns the previous step base).
+  
+  let span = currentSuns - prevSuns; 
+  if (span < 1) span = 1; // Safety for Jan 1st
+
   // 2. STANDARD 7AE (2014+)
   if (year >= 2014) {
-    return formatEorzean(getNominalTotalSuns(month, day), year - 2013, "7AE");
+    return formatEorzean(currentSuns, year - 2013, "7AE", span);
   }
 
   // 3. 7UE (2008 - Aug 26, 2013)
   if (year >= 2008 && localDate < aughtStart) {
-    return formatEorzean(getNominalTotalSuns(month, day), year - 2008, "7UE");
+    return formatEorzean(currentSuns, year - 2008, "7UE", span);
   }
 
   // 4. 6AE (Pre-2008)
-  return formatEorzean(getNominalTotalSuns(month, day), 1572 - (2007 - year), "6AE");
+  return formatEorzean(currentSuns, 1572 - (2007 - year), "6AE", span);
 }
 
 function getNominalTotalSuns(month, day) {
   const monthOffsets = [0, 32, 64, 96, 128, 160, 192, 224, 256, 288, 320, 352];
   let slide = 0;
+  
+  // This slide logic creates the "Gaps" (Double Dates)
   if (month === 0 && day >= 28) slide = 1;
   if (month === 1) {
     if (day >= 7) slide += 1;
     if (day >= 14) slide += 1;
     if (day >= 21) slide += 1;
-    if (day >= 28) slide += 3;
+    if (day >= 28) slide += 3; // The big Feb 28th jump
   }
   if (month >= 2 && day >= 28) slide = 1;
+
+  // Handles day=0 (previous month last day) implicitly via the math, 
+  // but simpler to just trust the map for day 1-31
   return monthOffsets[month] + day + slide;
 }
 
-function formatEorzean(totalSuns, year, era) {
-  const moonIdx = Math.floor((totalSuns - 1) / 32);
-  const sun = ((totalSuns - 1) % 32) + 1;
-  const list = moonIdx % 2 === 0 ? ASTRAL_MOONS : UMBRAL_MOONS;
-  const moonName = list[Math.floor(moonIdx / 2)];
-
+function formatEorzean(endSun, year, era, span = 1) {
   const eraNames = {
     "7AE": "7th Astral Era",
     "7UE": "7th Umbral Era",
     "6AE": "6th Astral Era"
   };
 
+  let dateString = "";
+
+  if (span === 1) {
+    // Standard Single Date
+    const { sun, moonName } = getDateComponents(endSun);
+    dateString = `${getOrdinal(sun)} Sun of the ${moonName}`;
+  } else {
+    // Range Logic (Double Dates)
+    const startSun = endSun - span + 1;
+    const startComp = getDateComponents(startSun);
+    const endComp = getDateComponents(endSun);
+
+    if (startComp.moonName === endComp.moonName) {
+      // Same Moon (e.g., "28th or 29th Sun of the 1st Astral Moon")
+      // Special check for spans > 2 (Like Feb 28th)
+      if (span > 2) {
+         dateString = `${getOrdinal(startComp.sun)} &ndash; ${getOrdinal(endComp.sun)} Sun of the ${startComp.moonName}`;
+      } else {
+         dateString = `${getOrdinal(startComp.sun)} or ${getOrdinal(endComp.sun)} Sun of the ${startComp.moonName}`;
+      }
+    } else {
+      // Crossing Moon Boundaries (Rare, but possible on Feb 28th leaps)
+      dateString = `${getOrdinal(startComp.sun)} Sun of the ${startComp.moonName} <br><span style="font-size:0.8em">or</span><br> ${getOrdinal(endComp.sun)} Sun of the ${endComp.moonName}`;
+    }
+  }
+
   return `
-    <div class="output-sun">${getOrdinal(sun)} Sun of the ${moonName}</div>
+    <div class="output-sun">${dateString}</div>
     <div class="output-year">Year ${year} of the ${eraNames[era] || era}</div>
   `;
 }
@@ -122,10 +169,10 @@ app.innerHTML = `
       </h1>
       <input type="date" id="dateInput">
       <div id="output">Choose an Earth calendar date to begin</div>
-<div class="timeline-box" id="timelineBox" style="display: none;">
-    <h3>This Year in Eorzea</h3>
-    <div id="timeline-event"></div>
-</div>
+      <div class="timeline-box" id="timelineBox" style="display: none;">
+          <h3>This Year in Eorzea</h3>
+          <div id="timeline-event"></div>
+      </div>
     </div>
     
     <div class="era-sidebar">
@@ -172,6 +219,6 @@ document.getElementById("dateInput").addEventListener("change", (e) => {
     document.getElementById("timeline-event").innerHTML = eventText;
     timelineBox.style.display = "block";
   } else {
-    timelineBox.style.display = "none"; // Vanishes when data is missing
+    timelineBox.style.display = "none";
   }
 });
