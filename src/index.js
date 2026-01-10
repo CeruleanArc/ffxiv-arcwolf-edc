@@ -3,20 +3,21 @@ const app = document.getElementById("app");
 // --- CONFIGURATION: THE OFFICIAL MAPPING ---
 // This list defines which Earth dates map to TWO Eorzean Suns.
 // Format: Month (0-11): [Day, Day...]
-// Month 0 = Jan, 1 = Feb, etc.
+// Note: We include 28 for Feb to handle non-leap years. 
+// The logic below automatically handles Leap Years (Feb 29).
 const EXTRA_SUN_DATES = {
-  0: [31],        // Jan 31 = 31st & 32nd Sun
-  1: [7, 14, 21, 28], // Feb: +4 Suns (The standard weekly slide)
-  2: [31],        // Mar 31
-  3: [15, 30],    // Apr (Needs +2 Suns. Verify these dates!)
-  4: [31],        // May 31
-  5: [15, 30],    // Jun (Needs +2 Suns. Verify these dates!)
-  6: [31],        // Jul 31
-  7: [31],        // Aug 31
-  8: [7, 23],     // Sep (Needs +2 Suns. You confirmed the 7th. I guessed 23rd.)
-  9: [31],        // Oct 31
-  10: [15, 30],   // Nov (Needs +2 Suns. Verify these dates!)
-  11: [31]        // Dec 31
+  0: [28],            // Jan (31 days + 1 = 32 Suns)
+  1: [7, 14, 21, 28], // Feb (28 days + 4 = 32 Suns)
+  2: [28],            // Mar (31 days + 1 = 32 Suns)
+  3: [7, 28],         // Apr (30 days + 2 = 32 Suns)
+  4: [29],            // May (31 days + 1 = 32 Suns)
+  5: [7, 28],         // Jun (30 days + 2 = 32 Suns)
+  6: [28],            // Jul (31 days + 1 = 32 Suns)
+  7: [28],            // Aug (31 days + 1 = 32 Suns)
+  8: [7, 28],         // Sep (30 days + 2 = 32 Suns)
+  9: [28],            // Oct (31 days + 1 = 32 Suns)
+  10: [7, 28],        // Nov (30 days + 2 = 32 Suns)
+  11: [28]            // Dec (31 days + 1 = 32 Suns)
 };
 
 const EORZEAN_TIMELINE = {
@@ -67,6 +68,7 @@ function getEorzeanDate(earthDate) {
   const day = earthDate.getDate(); 
   const localDate = new Date(year, month, day);
 
+  // ACCORD NEXUS PROTOCOL
   if (year < 435) {
     document.getElementById("output").classList.add("denied");
     return `
@@ -80,6 +82,7 @@ function getEorzeanDate(earthDate) {
 
   document.getElementById("output").classList.remove("denied");
 
+  // 1. AUGHT REVISION (Aug 27, 2013 - Dec 31, 2013)
   const aughtStart = new Date(2013, 7, 27);
   const yearEnd = new Date(2013, 11, 31);
 
@@ -90,44 +93,68 @@ function getEorzeanDate(earthDate) {
     return formatEorzean(totalSuns, 0, "7AE");
   }
 
-  // --- CHANGED: Use the new robust calculator ---
-  let currentSuns = getNominalTotalSuns(month, day);
-  let prevSuns = getNominalTotalSuns(month, day - 1); 
+  // STANDARD MAPPING LOGIC (Used for 7AE, 7UE, 6AE)
+  // We pass 'year' to handle Leap Years correctly
+  let currentSuns = getNominalTotalSuns(month, day, year);
+  let prevSuns = getNominalTotalSuns(month, day - 1, year); 
   
   // Logic: If today is Sun 30, and yesterday was Sun 28, span is 2.
   let span = currentSuns - prevSuns; 
   if (span < 1) span = 1; 
 
+  // 2. STANDARD 7AE (2014+)
   if (year >= 2014) {
     return formatEorzean(currentSuns, year - 2013, "7AE", span);
   }
+
+  // 3. 7UE (2008 - Aug 26, 2013)
   if (year >= 2008 && localDate < aughtStart) {
     return formatEorzean(currentSuns, year - 2008, "7UE", span);
   }
+
+  // 4. 6AE (Pre-2008)
   return formatEorzean(currentSuns, 1572 - (2007 - year), "6AE", span);
 }
 
-// --- NEW FUNCTION: The Configuration Engine ---
-function getNominalTotalSuns(month, day) {
-  const monthOffsets = [0, 32, 64, 96, 128, 160, 192, 224, 256, 288, 320, 352];
-  let slide = 0;
+// --- CORE ENGINE UPGRADE: Earth Day Summation ---
+function getNominalTotalSuns(month, day, year) {
+  const isLeap = (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
+  
+  // Earth Days per month
+  const earthDaysInMonth = [31, isLeap ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+  
+  let totalSuns = 0;
 
-  // 1. Calculate Full Month Slides (Past Months)
-  // We sum up all the extra suns from previous months
+  // 1. Add up all previous months
   for (let m = 0; m < month; m++) {
+    totalSuns += earthDaysInMonth[m]; // Add pure Earth days
+    
+    // Add slides from previous months
     if (EXTRA_SUN_DATES[m]) {
-      slide += EXTRA_SUN_DATES[m].length;
+      let slides = EXTRA_SUN_DATES[m];
+      // LEAP YEAR FIX: If it's a leap year, ignore the Feb 28th slide
+      if (isLeap && m === 1) {
+        slides = slides.filter(d => d !== 28);
+      }
+      totalSuns += slides.length;
     }
   }
 
-  // 2. Calculate Current Month Slides (Days so far)
+  // 2. Add days from current month
+  totalSuns += day;
+
+  // 3. Add slides from current month up to today
   if (EXTRA_SUN_DATES[month]) {
-    // For every "Double Date" that has passed or is today, add a slide
-    const extraDays = EXTRA_SUN_DATES[month].filter(d => day >= d);
-    slide += extraDays.length;
+    let slides = EXTRA_SUN_DATES[month];
+    // LEAP YEAR FIX: If it's a leap year, ignore the Feb 28th slide
+    if (isLeap && month === 1) {
+      slides = slides.filter(d => d !== 28);
+    }
+    const extraDays = slides.filter(d => day >= d);
+    totalSuns += extraDays.length;
   }
 
-  return monthOffsets[month] + day + slide;
+  return totalSuns;
 }
 
 function formatEorzean(endSun, year, era, span = 1) {
@@ -143,15 +170,14 @@ function formatEorzean(endSun, year, era, span = 1) {
     const { sun, moonName } = getDateComponents(endSun);
     dateString = `${getOrdinal(sun)} Sun of the ${moonName}`;
   } else {
-    // Range Logic for Double Dates
     const startSun = endSun - span + 1;
     const startComp = getDateComponents(startSun);
     const endComp = getDateComponents(endSun);
 
     if (startComp.moonName === endComp.moonName) {
-      if (span > 2) { // For big jumps (rare)
+      if (span > 2) { 
          dateString = `${getOrdinal(startComp.sun)} &ndash; ${getOrdinal(endComp.sun)} Sun of the ${startComp.moonName}`;
-      } else { // The Standard Double Date
+      } else { 
          dateString = `${getOrdinal(startComp.sun)} or ${getOrdinal(endComp.sun)} Sun of the ${startComp.moonName}`;
       }
     } else {
