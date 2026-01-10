@@ -2,7 +2,7 @@
 # The FFXIV-Arcwolf Eorzean Date Converter
 I made an app. It was *hard!* I'm tired now. Too tired to explain. Here is fast explanation.
 ## What Is it?
-A React-based Eorzean Date Converter (EDC) implementing custom temporal-mapping algorithms. Features a responsive terminal-style UI, real-time synchronization, and local persistence. Developed to standardize date-tracking within complex narrative frameworks.
+A lightweight, Vanilla JavaScript-based Eorzean Date Converter (EDC) implementing custom temporal-mapping algorithms. Features a responsive terminal-style UI, real-time synchronization, and local persistence. Developed to standardize date-tracking within complex narrative frameworks.
 ## Where Is it?
 Here!
 > #### [The FFXIV-Arcwolf Eorzean Date Converter](https://edc.jijivisa.org)
