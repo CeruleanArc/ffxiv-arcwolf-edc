@@ -207,14 +207,13 @@ h1 {
     flex-direction: column;
     align-items: center;
     gap: 30px;
-    margin-top: 20px; /* Slimmer top margin for mobile screens */
-    width: 92%; /* Maximizes space without touching the glass */
+    margin-top: 20px;
+    width: 92%;
   }
 
   .converter-box {
-    padding: 30px 15px; /* Keeps internal text away from box edges */
-    width: 100%;
-    box-sizing: border-box;
+    padding: 30px;
+    min-height: 480px; /* Slimmer for mobile height */
   }
 
   .era-sidebar {
@@ -228,6 +227,22 @@ h1 {
   h1 {
     font-size: 1.6rem;
     line-height: 2.2rem;
+  }
+
+  .title-brand {
+    font-size: 2.2rem;
+  }
+
+  .title-app {
+    font-size: 1.2rem;
+  }
+
+  .timeline-box h3 {
+    font-size: 0.9rem;
+  }
+
+  #timeline-event {
+    font-size: 0.85rem;
   }
 }
 
