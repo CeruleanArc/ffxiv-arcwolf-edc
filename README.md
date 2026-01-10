@@ -1,3 +1,4 @@
+![The Hoji Sigil](hoji.png)
 # The FFXIV-Arcwolf Eorzean Date Converter
 I made an app. It was *hard!* I'm tired now. Too tired to explain. Here is fast explanation.
 ## What Is it?
