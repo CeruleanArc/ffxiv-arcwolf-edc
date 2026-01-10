@@ -84,16 +84,6 @@ h1 {
   margin: 40px auto 120px auto; /* Adds top margin and bottom buffer for footer */
 }
 
-.converter-box {
-  flex: 2;
-  background: rgba(20, 20, 40, 0.9);
-  padding: 40px;
-  border: 1px solid #4e4e8e;
-  border-radius: 12px;
-  text-align: center;
-  box-shadow: 0 0 30px rgba(0, 100, 255, 0.2);
-}
-
 .era-sidebar {
   flex: 1;
   background: rgba(15, 15, 30, 0.8);
@@ -211,9 +201,9 @@ h1 {
     width: 92%;
   }
 
-  .converter-box {
+.converter-box {
     padding: 30px;
-    min-height: 480px; /* Slimmer for mobile height */
+    min-height: 480px; /* Reduced floor for mobile devices */
   }
 
   .era-sidebar {
@@ -294,13 +284,31 @@ h1 {
   100% { opacity: 1; }
 }
 
+.converter-box {
+  flex: 2;
+  background: rgba(20, 20, 40, 0.9);
+  padding: 40px;
+  border: 1px solid #4e4e8e;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(0, 100, 255, 0.2);
+
+  /* SURGICAL ADDITION: Enables the 'Push' logic */
+  display: flex;
+  flex-direction: column;
+  min-height: 550px; /* Ensures there is a 'floor' to push toward */
+}
+
 .timeline-box {
-  background: rgba(40, 20, 20, 0.4); /* Subtle red shift for historical weight */
+  background: rgba(40, 20, 20, 0.4);
   padding: 15px;
   border: 1px solid #8e4e4e;
   border-radius: 8px;
-  margin-bottom: 25px;
   box-shadow: 0 0 15px rgba(255, 100, 100, 0.1);
+
+  /* SURGICAL ADDITION: Pushes the box to the absolute bottom */
+  margin-top: auto; 
+  margin-bottom: 0;
 }
 
 .timeline-box h3 {
