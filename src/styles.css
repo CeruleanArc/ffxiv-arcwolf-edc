@@ -16,16 +16,20 @@ body {
 }
 
 input[type="date"] {
+  display: block; /* SURGICAL FIX: Allows centering */
+  margin: 20px auto 30px auto; /* Centered with top/bottom gutters */
   background: #0f0f1f;
   color: #fff;
   border: 1px solid #4e4e8e;
-  padding: 10px;
+  padding: 12px 20px;
   border-radius: 4px;
-  /* This forces the browser's calendar icon to match your blue output */
+  font-family: inherit; /* Ensures it uses Cinzel if supported */
+  width: 200px; /* Uniform width for better visual grounding */
+  text-align: center;
+  
+  /* Standard blue-glow iconography */
   color-scheme: dark;
   accent-color: #a0c0ff;
-  margin-top: 20px;
-  margin-bottom: 30px;
 }
 
 /* Specifically targeting the calendar icon's filter for the blue glow */
