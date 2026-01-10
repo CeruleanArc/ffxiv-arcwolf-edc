@@ -101,21 +101,78 @@ function getEorzeanDate(earthDate) {
 }
 
 function getNominalTotalSuns(month, day) {
+  // Base offsets for the start of each Eorzean month (32 days per month)
   const monthOffsets = [0, 32, 64, 96, 128, 160, 192, 224, 256, 288, 320, 352];
   let slide = 0;
-  
-  // This slide logic creates the "Gaps" (Double Dates)
-  if (month === 0 && day >= 28) slide = 1;
+
+  // JAN (31 days -> Needs +1 to reach 32)
+  if (month === 0) {
+    if (day >= 31) slide = 1; // 31st becomes 31 & 32
+  }
+
+  // FEB (28 days -> Needs +4 to reach 64)
+  // We spread the 4 extra suns: 7th, 14th, 21st, 28th
   if (month === 1) {
     if (day >= 7) slide += 1;
     if (day >= 14) slide += 1;
     if (day >= 21) slide += 1;
-    if (day >= 28) slide += 3; // The big Feb 28th jump
+    if (day >= 28) slide += 1; // Only +1 here, total +4
   }
-  if (month >= 2 && day >= 28) slide = 1;
 
-  // Handles day=0 (previous month last day) implicitly via the math, 
-  // but simpler to just trust the map for day 1-31
+  // MAR (31 days -> Needs +1 to reach 96)
+  if (month === 2) {
+    if (day >= 31) slide = 1;
+  }
+
+  // APR (30 days -> Needs +2 to reach 128)
+  if (month === 3) {
+    if (day >= 15) slide += 1;
+    if (day >= 30) slide += 1;
+  }
+
+  // MAY (31 days -> Needs +1 to reach 160)
+  if (month === 4) {
+    if (day >= 31) slide = 1;
+  }
+
+  // JUN (30 days -> Needs +2 to reach 192)
+  if (month === 5) {
+    if (day >= 15) slide += 1;
+    if (day >= 30) slide += 1;
+  }
+
+  // JUL (31 days -> Needs +1 to reach 224)
+  if (month === 6) {
+    if (day >= 31) slide = 1;
+  }
+
+  // AUG (31 days -> Needs +1 to reach 256)
+  if (month === 7) {
+    if (day >= 31) slide = 1;
+  }
+
+  // SEP (30 days -> Needs +2 to reach 288)
+  if (month === 8) {
+    if (day >= 15) slide += 1;
+    if (day >= 30) slide += 1;
+  }
+
+  // OCT (31 days -> Needs +1 to reach 320)
+  if (month === 9) {
+    if (day >= 31) slide = 1;
+  }
+
+  // NOV (30 days -> Needs +2 to reach 352)
+  if (month === 10) {
+    if (day >= 15) slide += 1;
+    if (day >= 30) slide += 1;
+  }
+
+  // DEC (31 days -> Needs +1 to reach 384)
+  if (month === 11) {
+    if (day >= 31) slide = 1;
+  }
+
   return monthOffsets[month] + day + slide;
 }
 
