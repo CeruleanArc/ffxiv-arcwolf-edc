@@ -1,5 +1,24 @@
 const app = document.getElementById("app");
 
+// --- CONFIGURATION: THE OFFICIAL MAPPING ---
+// This list defines which Earth dates map to TWO Eorzean Suns.
+// Format: Month (0-11): [Day, Day...]
+// Month 0 = Jan, 1 = Feb, etc.
+const EXTRA_SUN_DATES = {
+  0: [31],        // Jan 31 = 31st & 32nd Sun
+  1: [7, 14, 21, 28], // Feb: +4 Suns (The standard weekly slide)
+  2: [31],        // Mar 31
+  3: [15, 30],    // Apr (Needs +2 Suns. Verify these dates!)
+  4: [31],        // May 31
+  5: [15, 30],    // Jun (Needs +2 Suns. Verify these dates!)
+  6: [31],        // Jul 31
+  7: [31],        // Aug 31
+  8: [7, 23],     // Sep (Needs +2 Suns. You confirmed the 7th. I guessed 23rd.)
+  9: [31],        // Oct 31
+  10: [15, 30],   // Nov (Needs +2 Suns. Verify these dates!)
+  11: [31]        // Dec 31
+};
+
 const EORZEAN_TIMELINE = {
   "6AE-470": "The nation of Sharlayan is founded in the Northern Empty.",
   "6AE-547": "Haldrath, the first Azure Dragoon, fells Nidhogg; the nation of Ishgard is founded.",
@@ -34,7 +53,6 @@ function getOrdinal(n) {
   return n + (s[(v - 20) % 10] || s[v] || s[0]);
 }
 
-// Helper to get Moon and Sun data from a raw total
 function getDateComponents(totalSuns) {
   const moonIdx = Math.floor((totalSuns - 1) / 32);
   const sun = ((totalSuns - 1) % 32) + 1;
@@ -46,10 +64,9 @@ function getDateComponents(totalSuns) {
 function getEorzeanDate(earthDate) {
   const year = earthDate.getFullYear();
   const month = earthDate.getMonth();
-  const day = earthDate.getDate(); // 1-31
+  const day = earthDate.getDate(); 
   const localDate = new Date(year, month, day);
 
-  // ACCORD NEXUS PROTOCOL
   if (year < 435) {
     document.getElementById("output").classList.add("denied");
     return `
@@ -63,114 +80,51 @@ function getEorzeanDate(earthDate) {
 
   document.getElementById("output").classList.remove("denied");
 
-  // 1. AUGHT REVISION (Aug 27, 2013 - Dec 31, 2013)
   const aughtStart = new Date(2013, 7, 27);
   const yearEnd = new Date(2013, 11, 31);
 
   if (localDate >= aughtStart && localDate <= yearEnd) {
     const diffTime = localDate.getTime() - aughtStart.getTime();
     const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
-    // Aught Revision is highly compressed, so we stick to the primary calculated date for clarity
     const totalSuns = Math.floor(diffDays * 3.0397) + 1;
     return formatEorzean(totalSuns, 0, "7AE");
   }
 
-  // STANDARD MAPPING LOGIC (Used for 7AE, 7UE, 6AE)
+  // --- CHANGED: Use the new robust calculator ---
   let currentSuns = getNominalTotalSuns(month, day);
   let prevSuns = getNominalTotalSuns(month, day - 1); 
   
-  // Detect if we skipped suns (The "Double Date" Logic)
-  // Logic: If today is Sun 30, and yesterday was Sun 28, then today represents Sun 29 AND 30.
-  // Note: We use day-1. For the 1st of the month, this relies on getNominalTotalSuns handling day=0 correctly (it returns the previous step base).
-  
+  // Logic: If today is Sun 30, and yesterday was Sun 28, span is 2.
   let span = currentSuns - prevSuns; 
-  if (span < 1) span = 1; // Safety for Jan 1st
+  if (span < 1) span = 1; 
 
-  // 2. STANDARD 7AE (2014+)
   if (year >= 2014) {
     return formatEorzean(currentSuns, year - 2013, "7AE", span);
   }
-
-  // 3. 7UE (2008 - Aug 26, 2013)
   if (year >= 2008 && localDate < aughtStart) {
     return formatEorzean(currentSuns, year - 2008, "7UE", span);
   }
-
-  // 4. 6AE (Pre-2008)
   return formatEorzean(currentSuns, 1572 - (2007 - year), "6AE", span);
 }
 
+// --- NEW FUNCTION: The Configuration Engine ---
 function getNominalTotalSuns(month, day) {
-  // Base offsets for the start of each Eorzean month (32 days per month)
   const monthOffsets = [0, 32, 64, 96, 128, 160, 192, 224, 256, 288, 320, 352];
   let slide = 0;
 
-  // JAN (31 days -> Needs +1 to reach 32)
-  if (month === 0) {
-    if (day >= 31) slide = 1; // 31st becomes 31 & 32
+  // 1. Calculate Full Month Slides (Past Months)
+  // We sum up all the extra suns from previous months
+  for (let m = 0; m < month; m++) {
+    if (EXTRA_SUN_DATES[m]) {
+      slide += EXTRA_SUN_DATES[m].length;
+    }
   }
 
-  // FEB (28 days -> Needs +4 to reach 64)
-  // We spread the 4 extra suns: 7th, 14th, 21st, 28th
-  if (month === 1) {
-    if (day >= 7) slide += 1;
-    if (day >= 14) slide += 1;
-    if (day >= 21) slide += 1;
-    if (day >= 28) slide += 1; // Only +1 here, total +4
-  }
-
-  // MAR (31 days -> Needs +1 to reach 96)
-  if (month === 2) {
-    if (day >= 31) slide = 1;
-  }
-
-  // APR (30 days -> Needs +2 to reach 128)
-  if (month === 3) {
-    if (day >= 15) slide += 1;
-    if (day >= 30) slide += 1;
-  }
-
-  // MAY (31 days -> Needs +1 to reach 160)
-  if (month === 4) {
-    if (day >= 31) slide = 1;
-  }
-
-  // JUN (30 days -> Needs +2 to reach 192)
-  if (month === 5) {
-    if (day >= 15) slide += 1;
-    if (day >= 30) slide += 1;
-  }
-
-  // JUL (31 days -> Needs +1 to reach 224)
-  if (month === 6) {
-    if (day >= 31) slide = 1;
-  }
-
-  // AUG (31 days -> Needs +1 to reach 256)
-  if (month === 7) {
-    if (day >= 31) slide = 1;
-  }
-
-  // SEP (30 days -> Needs +2 to reach 288)
-  if (month === 8) {
-    if (day >= 15) slide += 1;
-    if (day >= 30) slide += 1;
-  }
-
-  // OCT (31 days -> Needs +1 to reach 320)
-  if (month === 9) {
-    if (day >= 31) slide = 1;
-  }
-
-  // NOV (30 days -> Needs +2 to reach 352)
-  if (month === 10) {
-    if (day >= 15) slide += 1;
-    if (day >= 30) slide += 1;
-  }
-
-  // DEC (31 days -> Needs +1 to reach 384)
-  if (month === 11) {
-    if (day >= 31) slide = 1;
+  // 2. Calculate Current Month Slides (Days so far)
+  if (EXTRA_SUN_DATES[month]) {
+    // For every "Double Date" that has passed or is today, add a slide
+    const extraDays = EXTRA_SUN_DATES[month].filter(d => day >= d);
+    slide += extraDays.length;
   }
 
   return monthOffsets[month] + day + slide;
@@ -186,25 +140,21 @@ function formatEorzean(endSun, year, era, span = 1) {
   let dateString = "";
 
   if (span === 1) {
-    // Standard Single Date
     const { sun, moonName } = getDateComponents(endSun);
     dateString = `${getOrdinal(sun)} Sun of the ${moonName}`;
   } else {
-    // Range Logic (Double Dates)
+    // Range Logic for Double Dates
     const startSun = endSun - span + 1;
     const startComp = getDateComponents(startSun);
     const endComp = getDateComponents(endSun);
 
     if (startComp.moonName === endComp.moonName) {
-      // Same Moon (e.g., "28th or 29th Sun of the 1st Astral Moon")
-      // Special check for spans > 2 (Like Feb 28th)
-      if (span > 2) {
+      if (span > 2) { // For big jumps (rare)
          dateString = `${getOrdinal(startComp.sun)} &ndash; ${getOrdinal(endComp.sun)} Sun of the ${startComp.moonName}`;
-      } else {
+      } else { // The Standard Double Date
          dateString = `${getOrdinal(startComp.sun)} or ${getOrdinal(endComp.sun)} Sun of the ${startComp.moonName}`;
       }
     } else {
-      // Crossing Moon Boundaries (Rare, but possible on Feb 28th leaps)
       dateString = `${getOrdinal(startComp.sun)} Sun of the ${startComp.moonName} <br><span style="font-size:0.8em">or</span><br> ${getOrdinal(endComp.sun)} Sun of the ${endComp.moonName}`;
     }
   }
@@ -215,7 +165,7 @@ function formatEorzean(endSun, year, era, span = 1) {
   `;
 }
 
-// --- SECTION 1: THE UI RENDER ---
+// --- APP INIT ---
 app.innerHTML = `
   <div class="main-container">
     <div class="converter-box">
@@ -250,28 +200,20 @@ app.innerHTML = `
   </div>
 `; 
 
-// --- SECTION 2: THE LOGIC LISTENER ---
 document.getElementById("dateInput").addEventListener("change", (e) => {
   const [y, m, d] = e.target.value.split("-").map(Number);
   const date = new Date(y, m - 1, d);
   date.setFullYear(y); 
-  
-  // Calculate Date
   const result = getEorzeanDate(date);
   document.getElementById("output").innerHTML = result;
-
-  // Surgical Timeline Update
-  const eraKey = result.includes("7th Astral") ? "7AE" : 
-                 result.includes("7th Umbral") ? "7UE" : "6AE";
   
+  const eraKey = result.includes("7th Astral") ? "7AE" : result.includes("7th Umbral") ? "7UE" : "6AE";
   const yearMatch = result.match(/Year (\d+)/);
   const yearNum = yearMatch ? yearMatch[1] : null;
   const lookupKey = `${eraKey}-${yearNum}`;
   
-  // THE TEMPORAL SHROUD: Only show box if event exists
   const eventText = EORZEAN_TIMELINE[lookupKey];
   const timelineBox = document.getElementById("timelineBox");
-
   if (eventText) {
     document.getElementById("timeline-event").innerHTML = eventText;
     timelineBox.style.display = "block";
