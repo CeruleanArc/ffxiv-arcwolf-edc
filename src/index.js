@@ -1,5 +1,20 @@
 const app = document.getElementById("app");
 
+const EORZEAN_TIMELINE = {
+  "6AE-1521": "The Garlean Empire is founded under Solus zos Galvus.",
+  "6AE-1557": "Ala Mhigo falls to the Garlean Empire; Nidhogg awakens and begins his assault on Ishgard.",
+  "6AE-1562": "The Battle of Silvertear Skies; Midgarsormr falls, primals are released, and the Echo awakens in mass.",
+  "6AE-1572": "The Seventh Umbral Calamity; the Battle of Carteneau and the release of Bahamut.",
+  "7UE-0": "The realm enters a state of mourning and rebuilding following the Calamity.",
+  "7UE-5": "The Seventh Umbral Era reaches its apex; the events of A Realm Reborn begin.",
+  "7AE-0": "The Seventh Astral Era is officially declared following the fall of the Ultima Weapon.",
+  "7AE-2": "The Dragonsong War reaches its final, bloody conclusion (Heavensward).",
+  "7AE-4": "The liberation of Ala Mhigo and Doma from Garlean rule (Stormblood).",
+  "7AE-6": "The first cross-rift travel to the First; the thwarting of the Final Days (Shadowbringers).",
+  "7AE-8": "The journey to the moon and the final confrontation with Meteion (Endwalker).",
+  "7AE-11": "Exploration of the New World, Tural, begins (Dawntrail)."
+};
+
 const ASTRAL_MOONS = [
   "1st Astral Moon", "2nd Astral Moon", "3rd Astral Moon",
   "4th Astral Moon", "5th Astral Moon", "6th Astral Moon",
@@ -106,6 +121,12 @@ app.innerHTML = `
     </div>
     
     <div class="era-sidebar">
+      <div class="timeline-box" id="timelineBox">
+        <h3>This Year in Eorzea</h3>
+        <div id="timeline-event">Select a date to view historical echoes</div>
+      </div>
+
+
       <h3>The Lived Chronology Protocol</h3>
       <div class="era-item">
         <strong>Year Aught (0:7AE):</strong>
@@ -127,9 +148,22 @@ app.innerHTML = `
 document.getElementById("dateInput").addEventListener("change", (e) => {
   const [y, m, d] = e.target.value.split("-").map(Number);
   const date = new Date(y, m - 1, d);
-  
-  // SURGICAL FORCE: Prevents 2-digit years from mapping to the 1900s
   date.setFullYear(y); 
   
-  document.getElementById("output").innerHTML = getEorzeanDate(date);
+  // Calculate Date
+  const result = getEorzeanDate(date);
+  document.getElementById("output").innerHTML = result;
+
+  // Surgical Timeline Update
+  const eraKey = result.includes("7th Astral") ? "7AE" : 
+                 result.includes("7th Umbral") ? "7UE" : "6AE";
+  
+  // Extract Year (e.g., "Year 12")
+  const yearMatch = result.match(/Year (\d+)/);
+  const yearNum = yearMatch ? yearMatch[1] : null;
+  
+  const lookupKey = `${eraKey}-${yearNum}`;
+  const eventText = EORZEAN_TIMELINE[lookupKey] || "No major recorded canonical events for this specific year.";
+  
+  document.getElementById("timeline-event").innerHTML = eventText;
 });
