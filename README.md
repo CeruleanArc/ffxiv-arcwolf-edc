@@ -4,7 +4,7 @@ I made an app. It was *hard!* I'm tired now. Too tired to explain. Here is fast 
 A React-based Eorzean Date Converter (EDC) implementing custom temporal-mapping algorithms. Features a responsive terminal-style UI, real-time synchronization, and local persistence. Developed to standardize date-tracking within complex narrative frameworks.
 ## Where Is it?
 Here!
-### [edc.jijivisa.org](https://edc.jijivisa.org)
+> ### [edc.jijivisa.org](https://edc.jijivisa.org)
 Use it online or install it to your Android phone using your browser! Whatever you wanna do. I'm not the boss of you.
 ## Why Is It?
 Oh I've said a bunch about that. First I wrote a big essay. It was a really good essay. The rationale is there, and a *lot* of math besides.
