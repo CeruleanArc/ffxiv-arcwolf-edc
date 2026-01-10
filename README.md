@@ -1,6 +1,6 @@
 ![The Hoji Sigil](hoji.png)
 # The FFXIV-Arcwolf Eorzean Date Converter
-I made an app. It was *hard!* I'm *tired*. Some of y'all do this for work! That's rad. It was kind of a blast, honestly. Also, AAAH! I made an app! XD
+I made an app. It was *hard!* I'm *tired*. Some of y'all do this for work? That's so cool. It was kind of a blast, working on all this. Like many blasts, it *did* leave me with a headache, but AAAH! I made an app! XD
 ## What Is it?
 A lightweight, Vanilla JavaScript Progressive Web App (PWA) designed to solve the "Time Bubble" problem in Final Fantasy XIV roleplay using the magics of evolutionary psychology, the neurology of memory, temporal physics, and maths. Lots of maths.
 
