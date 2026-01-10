@@ -118,15 +118,13 @@ app.innerHTML = `
       </h1>
       <input type="date" id="dateInput">
       <div id="output">Choose an Earth calendar date to begin</div>
-    </div>
-    
-    <div class="era-sidebar">
-      <div class="timeline-box" id="timelineBox">
+            <div class="timeline-box" id="timelineBox">
         <h3>This Year in Eorzea</h3>
         <div id="timeline-event">Select a date to view historical echoes</div>
       </div>
-
-
+    </div>
+    
+    <div class="era-sidebar">
       <h3>The Lived Chronology Protocol</h3>
       <div class="era-item">
         <strong>Year Aught (0:7AE):</strong>
