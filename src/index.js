@@ -198,7 +198,7 @@ app.innerHTML = `
       <h1>
         <span class="title-the">The</span>
         <span class="title-brand">FFXIV-Arcwolf</span>
-        <span class="title-app">Eorzean Date Converter</span>
+        <span class="title-app">Eorzean Date Converter v.1.5</span>
       </h1>
       <input type="date" id="dateInput">
       <div id="output">Choose an Earth calendar date to begin</div>
