@@ -122,10 +122,10 @@ app.innerHTML = `
       </h1>
       <input type="date" id="dateInput">
       <div id="output">Choose an Earth calendar date to begin</div>
-            <div class="timeline-box" id="timelineBox">
-        <h3>This Year in Eorzea</h3>
-        <div id="timeline-event">Select a date to view historical echoes</div>
-      </div>
+          <div class="timeline-box" id="timelineBox" style="display: none;">
+  <h3>This Year in Eorzea</h3>
+  <div id="timeline-event"></div>
+</div>
     </div>
     
     <div class="era-sidebar">
@@ -160,12 +160,18 @@ document.getElementById("dateInput").addEventListener("change", (e) => {
   const eraKey = result.includes("7th Astral") ? "7AE" : 
                  result.includes("7th Umbral") ? "7UE" : "6AE";
   
-  // Extract Year (e.g., "Year 12")
   const yearMatch = result.match(/Year (\d+)/);
   const yearNum = yearMatch ? yearMatch[1] : null;
-  
   const lookupKey = `${eraKey}-${yearNum}`;
-  const eventText = EORZEAN_TIMELINE[lookupKey] || "No major recorded canonical events for this specific year.";
   
-  document.getElementById("timeline-event").innerHTML = eventText;
+  // THE TEMPORAL SHROUD: Only show box if event exists
+  const eventText = EORZEAN_TIMELINE[lookupKey];
+  const timelineBox = document.getElementById("timelineBox");
+
+  if (eventText) {
+    document.getElementById("timeline-event").innerHTML = eventText;
+    timelineBox.style.display = "block";
+  } else {
+    timelineBox.style.display = "none"; // Vanishes when data is missing
+  }
 });

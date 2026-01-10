@@ -109,20 +109,32 @@ h1 {
 #output {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 15px;
   line-height: 1.4;
+  margin: 30px auto; /* Centered anchor */
+  padding: 25px 40px;
+  background: rgba(15, 15, 30, 0.7); /* Translucent deep blue */
+  border: 1px solid rgba(160, 192, 255, 0.4); /* Subtle blue glow frame */
+  border-radius: 8px;
+  width: fit-content; /* Shrinks to text size */
+  min-width: 300px;
+  max-width: 90%; /* Prevents edge-touching on mobile */
+  box-shadow: 0 0 20px rgba(0, 100, 255, 0.15);
+  text-align: center;
 }
 
 .output-sun {
-  font-size: 1.6rem;
-  color: #e0e0ff;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
 }
 
 .output-year {
   font-size: 1.2rem;
-  color: #a0c0ff; /* Subtle blue shift for the year line */
+  color: #a0c0ff;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
 }
 
 /* Mobile Scaling */
