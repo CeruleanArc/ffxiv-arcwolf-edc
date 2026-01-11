@@ -4,6 +4,8 @@
 # [The FFXIV-Arcwolf Eorzean Date Converter](https://edc.jijivisa.org) Visual Guide
 Some people enjoy a good TL;DR. Well, I *suck* at those, so I gave my work to Notebook LM and let *it* do it. Then I proofread its work. Not bad. A few errors here or there, but nothing that couldn't be smoothed out. Good work, Notebook LM. For the more visual learner, enjoy this visual guide!
 
+
+
 ![Alt_text_here](guide/guide1.png)
 
 ![Alt_text_here](guide/guide2.png)
