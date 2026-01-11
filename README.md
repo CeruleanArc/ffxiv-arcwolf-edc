@@ -47,7 +47,7 @@ Some people enjoy a good TL;DR. Well, I *suck* at those, so I gave my work to No
 
 
 </details>
-If you *hate* math, and you'd rather just learn how it works in a pretty, enchanting way that avoids numbers as much as humanly possible, [you've come to the right place.](GUIDE.md)
+
 ### Changelog
 * **1.5**: Earth dates with two Eorzean suns mapped to them will now display *both* dates, offering users either option for their own RP. Also resolved a related issue with leap years (and the in-game calendar assuming *all* Earth years are leap years). February 29ths on non-leap years are now safeguarded by the Accord Nexus.
 * **1.0**: App is up! It changes Earth dates to Eorzean dates and sometimes gives you little tidbits about what was going in Eorzea on the year in question.
