@@ -13,6 +13,9 @@ You can access the live, secure tool here: [**The FFXIV-Arcwolf Eorzean Date Con
 * **For Users**: Just visit the link. On mobile devices, tap "Add to Home Screen" to install it as a standalone app.
 * **For Developers**: The source code is hosted right here. The logic is contained entirely within src/index.js for easy auditing or forking.
 If you do decide to fork, please *be gentle.* It's my first app.
+### Changelog
+* **1.5**: Earth dates with two Eorzean suns mapped to them will now display *both* dates, offering users either option for their own RP. Also resolved a related issue with leap years (and the in-game calendar assuming *all* Earth years are leap years). February 29ths on non-leap years are now safeguarded by the Accord Nexus.
+* **1.0**: App is up! It changes Earth dates to Eorzean dates and sometimes gives you little tidbits about what was going in Eorzea on the year in question.
 ## Why Is It?
 Because "static history" breaks immersion. The official game timeline exists in what Yoshi P. calls "[**Sazae-san space-time**](https://en.wikipedia.org/wiki/Floating_timeline)" where characters never age despite years of player activity. For many of us—from the neurodiverse and 'specially interested to the neurotypical and fanatical roleplayer—this stopped working *many* years ago. We needed a fix, and without intending to, the devs had always given us one. Right at the moment of character creation.
 
