@@ -1,3 +1,5 @@
+<a id="top"></a>
+
 ![The FFXIV-Arcwolf Eorzean Date Converter, by Ellis Cú Anann Arcwolf](edc.png)
 # [The FFXIV-Arcwolf Eorzean Date Converter](https://edc.jijivisa.org)
 I made an app. It was *hard!* I'm *tired*. Some of y'all do this for work? That's so cool. It was kind of a blast, working on all this. Like many blasts, it *did* leave me with a headache, but AAAH! I made an app! XD
@@ -32,3 +34,7 @@ This converter solves two specific mathematical problems:
 The honor is mine. <3
 * **The Theory**: [Popping FFXIV's Time Bubble](https://open.substack.com/pub/murderofarcwolves/p/popping-ffxivs-time-bubble?utm_campaign=post-expanded-share&utm_medium=web)
 * **The Math**: [The Aught Revision](https://open.substack.com/pub/murderofarcwolves/p/popping-ffxivs-time-v2-bubble-the-aught?utm_campaign=post-expanded-share&utm_medium=web)
+
+
+
+[**Back to top**](#top)
