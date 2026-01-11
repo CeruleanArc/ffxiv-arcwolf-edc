@@ -18,15 +18,13 @@ If you do decide to fork, please *be gentle.* It's my first app.
 ### How Does It Work?
 If you *hate* math, and you'd rather just learn how it works in a pretty, enchanting way that avoids numbers as much as humanly possible, you've come to the right place. Click on the blue-dot-led line below to see the **FFXIV-Arcwolf EDC Visual Guide**.
 <details>
-  <summary>🔵 The FFXIV-Arcwolf EDC Visual Guide</summary>
+  <summary>🟣 The FFXIV-Arcwolf EDC Visual Guide</summary>
   
-> #### The FFXIV-Arcwolf EDC Visual Guide
+> ## The FFXIV-Arcwolf EDC Visual Guide
 > Some people enjoy a good TL;DR. Well, I *suck* at those, so I gave my work to Notebook LM and let *it* do it. Then I proofread its work. Not bad. A few errors here or there, but nothing that couldn't be smoothed out. Good work, Notebook LM. For the more visual learner, enjoy this visual guide!
 > 
-> 
-> 
 > ![Alt_text_here](guide/guide1.png)
-> 
+>
 > ![Alt_text_here](guide/guide2.png)
 > 
 > ![Alt_text_here](guide/guide3.png)
@@ -42,10 +40,6 @@ If you *hate* math, and you'd rather just learn how it works in a pretty, enchan
 > ![Alt_text_here](guide/guide8.png)
 > 
 > ![Alt_text_here](guide/guide9.png)
-> 
-> 
-> 
-> 
 </details>
 
 ### Changelog
