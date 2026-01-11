@@ -17,7 +17,7 @@ You can access the live, secure tool here: [**The FFXIV-Arcwolf Eorzean Date Con
 If you do decide to fork, please *be gentle.* It's my first app.
 ### How Does It Work?
 
-<details>
+### <details>
   <summary>If you *hate* math, and you'd rather just learn how it works in a pretty, enchanting way that avoids numbers as much as humanly possible, you've come to the right place. Click on this paragraph to see the **FFXIV-Arcwolf EDC Visual Guide**.</summary>
   
 # [The FFXIV-Arcwolf Eorzean Date Converter](https://edc.jijivisa.org) Visual Guide
