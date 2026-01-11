@@ -1,8 +1,8 @@
-![The Hoji Sigil](hoji.png)
+![The FFXIV-Arcwolf Eorzean Date Converter, by Ellis Cú Anann Arcwolf](edc.png)
 # [The FFXIV-Arcwolf Eorzean Date Converter](https://edc.jijivisa.org)
 I made an app. It was *hard!* I'm *tired*. Some of y'all do this for work? That's so cool. It was kind of a blast, working on all this. Like many blasts, it *did* leave me with a headache, but AAAH! I made an app! XD
 ## What Is it?
-A lightweight, Vanilla JavaScript Progressive Web App (PWA) designed to solve the "Time Bubble" problem in Final Fantasy XIV roleplay using the magics of evolutionary psychology, the neurology of memory, temporal physics, and maths. Lots of maths.
+A lightweight, Vanilla JavaScript Progressive Web App (PWA) designed to solve the "Time Bubble" problem in Final Fantasy XIV roleplay using the magics of in-game lore, evolutionary psychology, the neurology of memory, temporal physics, and maths. Lots of maths.
 
 Unlike standard converters that rely on arbitrary ratios, the **FFXIV-Arcwolf EDC** implements my very own, very special **Lived Chronology Protocol**. It enforces a 1:1 isochronal (i.e. meaning "takes the same length of time to elapse") mapping between Earth time and Etheiryan time, ensuring that one second on Earth equals one second on Etheirys. It features:
 * **Zero Dependencies**: Runs on raw, high-performance JavaScript with no frameworks.
