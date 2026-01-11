@@ -1,4 +1,4 @@
-![The FFXIV-Arcwolf Eorzean Date Converter, by Ellis Cú Anann Arcwolf](./edc.png)
+![The FFXIV-Arcwolf Eorzean Date Converter, by Ellis Cú Anann Arcwolf](../edc.png)
 # [The FFXIV-Arcwolf Eorzean Date Converter](https://edc.jijivisa.org) Visual Guide
 ![Alt_text_here](guide1.png)
 ![Alt_text_here](guide2.png)
