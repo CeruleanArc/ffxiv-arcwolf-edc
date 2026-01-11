@@ -16,36 +16,36 @@ You can access the live, secure tool here: [**The FFXIV-Arcwolf Eorzean Date Con
 * **For Developers** – The source code is hosted right here. The logic is contained entirely within src/index.js for easy auditing or forking.
 If you do decide to fork, please *be gentle.* It's my first app.
 ### How Does It Work?
-
+If you *hate* math, and you'd rather just learn how it works in a pretty, enchanting way that avoids numbers as much as humanly possible, you've come to the right place. Click on this paragraph to see the **FFXIV-Arcwolf EDC Visual Guide**.
 ### <details>
-  <summary>If you *hate* math, and you'd rather just learn how it works in a pretty, enchanting way that avoids numbers as much as humanly possible, you've come to the right place. Click on this paragraph to see the **FFXIV-Arcwolf EDC Visual Guide**.</summary>
+  <summary>The FFXIV-Arcwolf Eorzean Date Converter Visual Guide</summary>
   
-# [The FFXIV-Arcwolf Eorzean Date Converter](https://edc.jijivisa.org) Visual Guide
-Some people enjoy a good TL;DR. Well, I *suck* at those, so I gave my work to Notebook LM and let *it* do it. Then I proofread its work. Not bad. A few errors here or there, but nothing that couldn't be smoothed out. Good work, Notebook LM. For the more visual learner, enjoy this visual guide!
-
-
-
-![Alt_text_here](guide/guide1.png)
-
-![Alt_text_here](guide/guide2.png)
-
-![Alt_text_here](guide/guide3.png)
-
-![Alt_text_here](guide/guide4.png)
-
-![Alt_text_here](guide/guide5.png)
-
-![Alt_text_here](guide/guide6.png)
-
-![Alt_text_here](guide/guide7.png)
-
-![Alt_text_here](guide/guide8.png)
-
-![Alt_text_here](guide/guide9.png)
-
-
-
-
+> # [The FFXIV-Arcwolf Eorzean Date Converter](https://edc.jijivisa.org) Visual Guide
+> Some people enjoy a good TL;DR. Well, I *suck* at those, so I gave my work to Notebook LM and let *it* do it. Then I proofread its work. Not bad. A few errors here or there, but nothing that couldn't be smoothed out. Good work, Notebook LM. For the more visual learner, enjoy this visual guide!
+> 
+> 
+> 
+> ![Alt_text_here](guide/guide1.png)
+> 
+> ![Alt_text_here](guide/guide2.png)
+> 
+> ![Alt_text_here](guide/guide3.png)
+> 
+> ![Alt_text_here](guide/guide4.png)
+> 
+> ![Alt_text_here](guide/guide5.png)
+> 
+> ![Alt_text_here](guide/guide6.png)
+> 
+> ![Alt_text_here](guide/guide7.png)
+> 
+> ![Alt_text_here](guide/guide8.png)
+> 
+> ![Alt_text_here](guide/guide9.png)
+> 
+> 
+> 
+> 
 </details>
 
 ### Changelog
