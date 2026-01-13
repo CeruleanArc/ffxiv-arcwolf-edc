@@ -146,11 +146,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   letter-spacing: 2px;
 }
 
-/* --- TIMELINE LIST HANDLING --- */
+/* --- TIMELINE LIST HANDLING (Updated Spacing) --- */
 #timeline-event {
-  /* FONT RESTORED: Segoe UI for readability in the list */
+  /* Segoe UI for the list items (Readability) */
   font-family: "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
-  font-size: 0.95rem; 
+  font-size: 0.85rem; 
   font-weight: 400;
   text-align: left; 
   color: #e0e0ff; 
@@ -176,8 +176,13 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   left: 0;
   top: 1px; 
   color: #a0c0ff; 
-  font-size: 0.9em;
+  font-size: 0.8em;
   font-family: Arial, sans-serif; 
+}
+
+.timeline-box {
+  /* ADDED SPACING: Pushes the timeline down from the date box */
+  margin-top: 40px; 
 }
 
 .timeline-box h3 {
@@ -219,29 +224,33 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   100% { opacity: 1; }
 }
 
-/* --- THE TAPER FOOTER (RESTORED TO MONOSPACE) --- */
+/* --- THE TAPER FOOTER (Tech Upgrade) --- */
 .taper-footer {
-  font-family: "Courier New", Courier, monospace; /* THE ORIGINAL TAPER LOOK */
+  /* THE COOLER FONT: Consolas (Windows), Monaco (Mac), or standard Mono */
+  font-family: "Consolas", "Monaco", "Lucida Console", "Liberation Mono", monospace;
   width: 100%;
-  background: rgba(10, 10, 20, 0.9);
+  background: rgba(5, 5, 10, 0.95); /* Slightly darker for contrast */
   border-top: 1px solid #4e4e8e;
-  padding: 10px 40px; 
+  padding: 12px 40px; 
   position: fixed;
   bottom: 0;
   left: 0;
   z-index: 1000;
   box-sizing: border-box; 
+  box-shadow: 0 -5px 20px rgba(0,0,0,0.5); /* Lifted effect */
 }
 
 .footer-content {
   display: flex;
   justify-content: space-between; 
   align-items: center;
-  max-width: 1200px;
+  width: 98%; /* FORCES THE SPREAD: Uses full width */
+  max-width: 1800px; /* Allows it to stretch on wide screens */
   margin: 0 auto;
-  font-size: 0.75rem;
+  font-size: 0.7rem; /* Slightly smaller for that 'fine print' tech look */
   letter-spacing: 1px;
   color: #8e8eb2;
+  text-transform: uppercase; /* Makes it look like system status */
 }
 
 .footer-content span {
@@ -251,12 +260,13 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .footer-content a {
   color: #a0c0ff;
   text-decoration: none;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .footer-content a:hover {
   color: #ffffff;
   text-shadow: 0 0 8px #a0c0ff;
+  border-bottom: 1px solid #a0c0ff; /* Tech underline on hover */
 }
 
 /* --- MOBILE SCALING (Must be last) --- */
@@ -292,6 +302,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   }
   .footer-content {
     flex-direction: column;
-    gap: 5px;
+    gap: 8px; /* Slightly more space on mobile */
+    width: 100%;
   }
 }
