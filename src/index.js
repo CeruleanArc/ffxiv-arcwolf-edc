@@ -7,7 +7,8 @@ const EORZEAN_TIMELINE = {
   ],
   "6AE-547": [
     "Haldrath, the first Azure Dragoon, fells Nidhogg.",
-    "The nation of Ishgard is founded."
+    "The nation of Ishgard is founded.",
+    "This test item is created."
   ],
   "6AE-1021": [
     "The Belah'dian civilization collapses.",
