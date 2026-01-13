@@ -5,7 +5,7 @@ A lightweight, Vanilla JavaScript-based Eorzean Date Converter (EDC) implementin
 * **Ellis Arcwolf** programmed the app.
 * **Altari Arulaq** compiled Eorzean timeline data!
 ## Where Is it?
-You can access the live, secure tool here: [**The FFXIV-Arcwolf Eorzean Date Converter v1.5**](https://edc.jijivisa.org)
+You can access the live, secure tool here: [**The FFXIV-Arcwolf Eorzean Date Converter v2.0**](https://edc.jijivisa.org)
 * **For Users**: Just visit the link. On mobile devices, tap "Add to Home Screen" to install it as a standalone app.
 * **For Developers**: The source code is hosted right here. The logic is contained entirely within src/index.js for easy auditing or forking.
 If you do decide to fork, please *be gentle.* It's my first app.
@@ -37,6 +37,7 @@ If you *hate* math, and you'd rather just learn how it works in a pretty, enchan
 </details>
 
 ### Changelog
+* **2.0**: Special thanks to Altari Arulaq for putting together all of the lore for every year across the known and convertible Eorzean timeline!
 * **1.5**: Earth dates with two Eorzean suns mapped to them will now display *both* dates, offering users either option for their own RP. Also resolved a related issue with leap years (and the in-game calendar assuming *all* Earth years are leap years). February 29ths on non-leap years are now safeguarded by the Accord Nexus.
 * **1.0**: App is up! It changes Earth dates to Eorzean dates and sometimes gives you little tidbits about what was going in Eorzea on the year in question.
 ## Why Is It?
