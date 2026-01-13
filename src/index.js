@@ -256,6 +256,22 @@ const UMBRAL_MOONS = [
   "4th Umbral Moon", "5th Umbral Moon", "6th Umbral Moon",
 ];
 
+// [RECONSTRUCTED DATA] - Validated from 'Popping FFXIV's Time Bubble' Reference List
+const EXTRA_SUN_DATES = {
+  0: [28],            // Jan 28 (31 days + 1 = 32)
+  1: [7, 14, 21, 28], // Feb 7, 14, 21, 28 (28 days + 4 = 32)
+  2: [28],            // Mar 28 (31 days + 1 = 32)
+  3: [7, 28],         // Apr 7, 28 (30 days + 2 = 32)
+  4: [29],            // May 29 (31 days + 1 = 32)
+  5: [7, 28],         // Jun 7, 28 (30 days + 2 = 32)
+  6: [28],            // Jul 28 (31 days + 1 = 32)
+  7: [28],            // Aug 28 (31 days + 1 = 32)
+  8: [7, 28],         // Sep 7, 28 (30 days + 2 = 32)
+  9: [28],            // Oct 28 (31 days + 1 = 32)
+  10: [7, 28],        // Nov 7, 28 (30 days + 2 = 32)
+  11: [28]            // Dec 28 (31 days + 1 = 32)
+};
+
 function getOrdinal(n) {
   const s = ["th", "st", "nd", "rd"];
   const v = n % 100;
