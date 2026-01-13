@@ -1,8 +1,9 @@
 ![The Hoji Sigil](hoji.png)
 # The FFXIV-Arcwolf Eorzean Date Converter
-I made an app. It was *hard!* I'm tired now. Too tired to explain. Here is fast explanation.
 ## What Is it?
 A lightweight, Vanilla JavaScript-based Eorzean Date Converter (EDC) implementing custom temporal-mapping algorithms. Features a responsive terminal-style UI, real-time synchronization, and local persistence. Developed to standardize date-tracking within complex narrative frameworks.
+* **Ellis Arcwolf** programmed the app.
+* **Altari Arulaq** compiled Eorzean timeline data!
 ## Where Is it?
 Here!
 > #### [The FFXIV-Arcwolf Eorzean Date Converter](https://edc.jijivisa.org)

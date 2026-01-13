@@ -1,22 +1,66 @@
 const app = document.getElementById("app");
 
+// [STRUCTURE UPDATE] Arrays allow multiple events per year
 const EORZEAN_TIMELINE = {
-  "6AE-470": "The nation of Sharlayan is founded in the Northern Empty.",
-  "6AE-547": "Haldrath, the first Azure Dragoon, fells Nidhogg; the nation of Ishgard is founded.",
-  "6AE-1021": "The Belah'dian civilization collapses, eventually leading to the founding of Ul'dah and Sil'dih.",
-  "6AE-1468": "The Autumn War begins as Ala Mhigo invades the Black Shroud; Gridania and its allies eventually prevail.",
-  "6AE-1521": "The Garlean Empire is founded under Solus zos Galvus.",
-  "6AE-1557": "Ala Mhigo falls to the Garlean Empire; Nidhogg awakens and begins his assault on Ishgard.",
-  "6AE-1562": "The Bozja Citadel is destroyed by the Meteor Project; the Battle of Silvertear Skies occurs.",
-  "6AE-1572": "The Seventh Umbral Calamity; the Battle of Carteneau and the release of Bahamut.",
-  "7UE-0": "The realm enters a state of mourning and rebuilding following the Calamity.",
-  "7UE-5": "The Seventh Umbral Era reaches its apex; the events of A Realm Reborn begin.",
-  "7AE-0": "The Seventh Astral Era is officially declared following the fall of the Ultima Weapon.",
-  "7AE-2": "The Dragonsong War reaches its final, bloody conclusion (Heavensward).",
-  "7AE-4": "The liberation of Ala Mhigo and Doma from Garlean rule (Stormblood).",
-  "7AE-6": "The first cross-rift travel to the First; the thwarting of the Final Days (Shadowbringers).",
-  "7AE-8": "The journey to the moon and the final confrontation with Meteion (Endwalker).",
-  "7AE-11": "Exploration of the New World, Tural, begins (Dawntrail)."
+  "6AE-470": [
+    "The nation of Sharlayan is founded in the Northern Empty."
+  ],
+  "6AE-547": [
+    "Haldrath, the first Azure Dragoon, fells Nidhogg.",
+    "The nation of Ishgard is founded."
+  ],
+  "6AE-1021": [
+    "The Belah'dian civilization collapses.",
+    "The founding of Ul'dah and Sil'dih follows shortly after."
+  ],
+  "6AE-1468": [
+    "The Autumn War begins as Ala Mhigo invades the Black Shroud.",
+    "Gridania and its allies eventually prevail."
+  ],
+  "6AE-1521": [
+    "The Garlean Empire is founded under Solus zos Galvus."
+  ],
+  "6AE-1557": [
+    "Ala Mhigo falls to the Garlean Empire.",
+    "Nidhogg awakens and begins his assault on Ishgard."
+  ],
+  "6AE-1562": [
+    "The Bozja Citadel is destroyed by the Meteor Project.",
+    "The Battle of Silvertear Skies occurs."
+  ],
+  "6AE-1572": [
+    "The Seventh Umbral Calamity.",
+    "The Battle of Carteneau and the release of Bahamut."
+  ],
+  "7UE-0": [
+    "The realm enters a state of mourning and rebuilding following the Calamity."
+  ],
+  "7UE-5": [
+    "The Seventh Umbral Era reaches its apex.",
+    "The events of A Realm Reborn begin."
+  ],
+  "7AE-0": [
+    "The Seventh Astral Era is officially declared following the fall of the Ultima Weapon.",
+    "The Scions move their headquarters to the Rising Stones."
+  ],
+  "7AE-2": [
+    "The Dragonsong War reaches its final, bloody conclusion (Heavensward)."
+  ],
+  "7AE-4": [
+    "The liberation of Ala Mhigo from Garlean rule.",
+    "The liberation of Doma (Stormblood)."
+  ],
+  "7AE-6": [
+    "The first cross-rift travel to the First.",
+    "The thwarting of the Final Days (Shadowbringers)."
+  ],
+  "7AE-8": [
+    "The journey to the moon.",
+    "The final confrontation with Meteion (Endwalker)."
+  ],
+  "7AE-11": [
+    "Exploration of the New World, Tural, begins (Dawntrail)."
+  ]
 };
 
 const ASTRAL_MOONS = [
@@ -193,7 +237,7 @@ app.innerHTML = `
   </div>
 `; 
 
-// --- SECTION 2: THE LOGIC LISTENER ---
+// --- SECTION 2: THE LOGIC LISTENER (UPDATED) ---
 document.getElementById("dateInput").addEventListener("change", (e) => {
   const [y, m, d] = e.target.value.split("-").map(Number);
   const date = new Date(y, m - 1, d);
@@ -212,11 +256,18 @@ document.getElementById("dateInput").addEventListener("change", (e) => {
   const lookupKey = `${eraKey}-${yearNum}`;
   
   // THE TEMPORAL SHROUD: Only show box if event exists
-  const eventText = EORZEAN_TIMELINE[lookupKey];
+  const eventsList = EORZEAN_TIMELINE[lookupKey]; // Now retrieves an Array
   const timelineBox = document.getElementById("timelineBox");
+  const eventContainer = document.getElementById("timeline-event");
 
-  if (eventText) {
-    document.getElementById("timeline-event").innerHTML = eventText;
+  if (eventsList && eventsList.length > 0) {
+    // Convert array to bullet points
+    const listHTML = `
+      <ul>
+        ${eventsList.map(event => `<li>${event}</li>`).join('')}
+      </ul>
+    `;
+    eventContainer.innerHTML = listHTML;
     timelineBox.style.display = "block";
   } else {
     timelineBox.style.display = "none";
