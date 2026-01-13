@@ -25,6 +25,7 @@ const EORZEAN_TIMELINE = {
   "6AE-547": "Haldrath, the first Azure Dragoon, fells Nidhogg; the nation of Ishgard is founded.",
   "6AE-1021": "The Belah'dian civilization collapses, eventually leading to the founding of Ul'dah and Sil'dih.",
   "6AE-1468": "The Autumn War begins as Ala Mhigo invades the Black Shroud; Gridania and its allies eventually prevail.",
+  "6AE-1500": "Ketenramm Blaufystsyn returns to Limsa Lominsa from the New World.",
   "6AE-1521": "The Garlean Empire is founded under Solus zos Galvus.",
   "6AE-1557": "Ala Mhigo falls to the Garlean Empire; Nidhogg awakens and begins his assault on Ishgard.",
   "6AE-1562": "The Bozja Citadel is destroyed by the Meteor Project; the Battle of Silvertear Skies occurs.",
