@@ -261,14 +261,50 @@ h1 {
     font-size: 1.2rem;
   }
 
+/* --- TIMELINE LIST HANDLING (V2: In-Game Style) --- */
+#timeline-event {
+  /* 1. FONT SWAP: Switches from Cinzel to a clean, readable UI font */
+  font-family: "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.95rem; 
+  font-weight: 400;
+  
+  /* 2. ALIGNMENT: Left-aligns the text block */
+  text-align: left; 
+  
+  /* Color tweak: slightly brighter than before for readability */
+  color: #e0e0ff; 
+  margin-top: 15px;
+}
+
+#timeline-event ul {
+  /* Removes default bullets */
+  list-style: none; 
+  padding: 0;
+  margin: 0;
+}
+
+#timeline-event li {
+  position: relative;
+  /* 3. HANGING INDENT: Pushes text over to make room for the chevron */
+  padding-left: 20px; 
+  margin-bottom: 10px;
+  line-height: 1.5; /* more breathing room between lines */
+}
+
+/* 4. THE CHEVRON */
+#timeline-event li::before {
+  content: "❯"; /* A sharp, geometric right-facing chevron */
+  position: absolute;
+  left: 0;
+  top: 1px; /* Micro-adjustment to align with the first line of text */
+  color: #a0c0ff; /* Matches your 'App Title' blue accent */
+  font-size: 0.9em;
+  font-family: Arial, sans-serif; /* Ensures the chevron symbol renders cleanly */
+}
+
   .timeline-box h3 {
     font-size: 0.9rem;
   }
-
-  #timeline-event {
-    font-size: 0.85rem;
-  }
-}
 
 /* --- ACCORD NEXUS: ACCESS DENIED --- */
 .denied-message {
