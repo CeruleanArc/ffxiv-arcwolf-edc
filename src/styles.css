@@ -148,7 +148,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 /* --- TIMELINE LIST HANDLING --- */
 #timeline-event {
-  /* FONT REMOVED: Now inherits Cinzel from body */
+  /* FONT RESTORED: Segoe UI for readability in the list */
+  font-family: "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
   font-size: 0.95rem; 
   font-weight: 400;
   text-align: left; 
@@ -218,9 +219,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   100% { opacity: 1; }
 }
 
-/* --- THE TAPER FOOTER (CORRECTED FONT) --- */
+/* --- THE TAPER FOOTER (RESTORED TO MONOSPACE) --- */
 .taper-footer {
-  font-family: "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif; /* APPLIED HERE */
+  font-family: "Courier New", Courier, monospace; /* THE ORIGINAL TAPER LOOK */
   width: 100%;
   background: rgba(10, 10, 20, 0.9);
   border-top: 1px solid #4e4e8e;
