@@ -262,7 +262,6 @@ function getOrdinal(n) {
   return n + (s[(v - 20) % 10] || s[v] || s[0]);
 }
 
-// Helper to get Moon and Sun data from a raw total
 function getDateComponents(totalSuns) {
   const moonIdx = Math.floor((totalSuns - 1) / 32);
   const sun = ((totalSuns - 1) % 32) + 1;
@@ -274,7 +273,7 @@ function getDateComponents(totalSuns) {
 function getEorzeanDate(earthDate) {
   const year = earthDate.getFullYear();
   const month = earthDate.getMonth();
-  const day = earthDate.getDate(); // 1-31
+  const day = earthDate.getDate(); 
   const localDate = new Date(year, month, day);
 
   // ACCORD NEXUS PROTOCOL
@@ -298,21 +297,18 @@ function getEorzeanDate(earthDate) {
   if (localDate >= aughtStart && localDate <= yearEnd) {
     const diffTime = localDate.getTime() - aughtStart.getTime();
     const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
-    // Aught Revision is highly compressed, so we stick to the primary calculated date for clarity
     const totalSuns = Math.floor(diffDays * 3.0397) + 1;
     return formatEorzean(totalSuns, 0, "7AE");
   }
 
   // STANDARD MAPPING LOGIC (Used for 7AE, 7UE, 6AE)
-  let currentSuns = getNominalTotalSuns(month, day);
-  let prevSuns = getNominalTotalSuns(month, day - 1); 
+  // We pass 'year' to handle Leap Years correctly
+  let currentSuns = getNominalTotalSuns(month, day, year);
+  let prevSuns = getNominalTotalSuns(month, day - 1, year); 
   
-  // Detect if we skipped suns (The "Double Date" Logic)
-  // Logic: If today is Sun 30, and yesterday was Sun 28, then today represents Sun 29 AND 30.
-  // Note: We use day-1. For the 1st of the month, this relies on getNominalTotalSuns handling day=0 correctly (it returns the previous step base).
-  
+  // Logic: If today is Sun 30, and yesterday was Sun 28, span is 2.
   let span = currentSuns - prevSuns; 
-  if (span < 1) span = 1; // Safety for Jan 1st
+  if (span < 1) span = 1; 
 
   // 2. STANDARD 7AE (2014+)
   if (year >= 2014) {
@@ -328,23 +324,45 @@ function getEorzeanDate(earthDate) {
   return formatEorzean(currentSuns, 1572 - (2007 - year), "6AE", span);
 }
 
-function getNominalTotalSuns(month, day) {
-  const monthOffsets = [0, 32, 64, 96, 128, 160, 192, 224, 256, 288, 320, 352];
-  let slide = 0;
+// --- CORE ENGINE UPGRADE: Earth Day Summation ---
+function getNominalTotalSuns(month, day, year) {
+  const isLeap = (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
   
-  // This slide logic creates the "Gaps" (Double Dates)
-  if (month === 0 && day >= 28) slide = 1;
-  if (month === 1) {
-    if (day >= 7) slide += 1;
-    if (day >= 14) slide += 1;
-    if (day >= 21) slide += 1;
-    if (day >= 28) slide += 3; // The big Feb 28th jump
-  }
-  if (month >= 2 && day >= 28) slide = 1;
+  // Earth Days per month
+  const earthDaysInMonth = [31, isLeap ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+  
+  let totalSuns = 0;
 
-  // Handles day=0 (previous month last day) implicitly via the math, 
-  // but simpler to just trust the map for day 1-31
-  return monthOffsets[month] + day + slide;
+  // 1. Add up all previous months
+  for (let m = 0; m < month; m++) {
+    totalSuns += earthDaysInMonth[m]; // Add pure Earth days
+    
+    // Add slides from previous months
+    if (EXTRA_SUN_DATES[m]) {
+      let slides = EXTRA_SUN_DATES[m];
+      // LEAP YEAR FIX: If it's a leap year, ignore the Feb 28th slide
+      if (isLeap && m === 1) {
+        slides = slides.filter(d => d !== 28);
+      }
+      totalSuns += slides.length;
+    }
+  }
+
+  // 2. Add days from current month
+  totalSuns += day;
+
+  // 3. Add slides from current month up to today
+  if (EXTRA_SUN_DATES[month]) {
+    let slides = EXTRA_SUN_DATES[month];
+    // LEAP YEAR FIX: If it's a leap year, ignore the Feb 28th slide
+    if (isLeap && month === 1) {
+      slides = slides.filter(d => d !== 28);
+    }
+    const extraDays = slides.filter(d => day >= d);
+    totalSuns += extraDays.length;
+  }
+
+  return totalSuns;
 }
 
 function formatEorzean(endSun, year, era, span = 1) {
@@ -357,25 +375,20 @@ function formatEorzean(endSun, year, era, span = 1) {
   let dateString = "";
 
   if (span === 1) {
-    // Standard Single Date
     const { sun, moonName } = getDateComponents(endSun);
     dateString = `${getOrdinal(sun)} Sun of the ${moonName}`;
   } else {
-    // Range Logic (Double Dates)
     const startSun = endSun - span + 1;
     const startComp = getDateComponents(startSun);
     const endComp = getDateComponents(endSun);
 
     if (startComp.moonName === endComp.moonName) {
-      // Same Moon (e.g., "28th or 29th Sun of the 1st Astral Moon")
-      // Special check for spans > 2 (Like Feb 28th)
-      if (span > 2) {
+      if (span > 2) { 
          dateString = `${getOrdinal(startComp.sun)} &ndash; ${getOrdinal(endComp.sun)} Sun of the ${startComp.moonName}`;
-      } else {
+      } else { 
          dateString = `${getOrdinal(startComp.sun)} or ${getOrdinal(endComp.sun)} Sun of the ${startComp.moonName}`;
       }
     } else {
-      // Crossing Moon Boundaries (Rare, but possible on Feb 28th leaps)
       dateString = `${getOrdinal(startComp.sun)} Sun of the ${startComp.moonName} <br><span style="font-size:0.8em">or</span><br> ${getOrdinal(endComp.sun)} Sun of the ${endComp.moonName}`;
     }
   }
@@ -386,14 +399,14 @@ function formatEorzean(endSun, year, era, span = 1) {
   `;
 }
 
-// --- SECTION 1: THE UI RENDER ---
+// --- APP INIT ---
 app.innerHTML = `
   <div class="main-container">
     <div class="converter-box">
       <h1>
         <span class="title-the">The</span>
         <span class="title-brand">FFXIV-Arcwolf</span>
-        <span class="title-app">Eorzean Date Converter</span>
+        <span class="title-app">Eorzean Date Converter v1.5</span>
       </h1>
       <input type="date" id="dateInput">
       <div id="output">Choose an Earth calendar date to begin</div>
@@ -426,15 +439,10 @@ document.getElementById("dateInput").addEventListener("change", (e) => {
   const [y, m, d] = e.target.value.split("-").map(Number);
   const date = new Date(y, m - 1, d);
   date.setFullYear(y); 
-  
-  // Calculate Date
   const result = getEorzeanDate(date);
   document.getElementById("output").innerHTML = result;
-
-  // Surgical Timeline Update
-  const eraKey = result.includes("7th Astral") ? "7AE" : 
-                 result.includes("7th Umbral") ? "7UE" : "6AE";
   
+  const eraKey = result.includes("7th Astral") ? "7AE" : result.includes("7th Umbral") ? "7UE" : "6AE";
   const yearMatch = result.match(/Year (\d+)/);
   const yearNum = yearMatch ? yearMatch[1] : null;
   const lookupKey = `${eraKey}-${yearNum}`;
