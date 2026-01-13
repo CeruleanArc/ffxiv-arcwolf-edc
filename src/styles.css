@@ -141,88 +141,29 @@ h1 {
   letter-spacing: 2px;
 }
 
-/* Mobile Scaling */
-@media (max-width: 768px) {
-  .output-sun {
-    font-size: 1.3rem;
-  }
-  .output-year {
-    font-size: 1rem;
-  }
-}
-
-/* --- TAPER FOOTER RECONSTRUCTION --- */
-.taper-footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  padding: 12px 20px; /* Reduced side padding for mobile */
-  background: rgba(13, 13, 26, 0.95);
-  border-top: 1px solid #a0c0ff;
-  font-family: "Courier New", monospace;
-  font-size: 0.7rem; /* Slightly smaller for density */
-  letter-spacing: 1px;
-  color: #e0e0ff;
-  z-index: 1000;
-  
-  /* Flexbox allows items to flow and wrap */
+.converter-box {
+  flex: 2;
+  background: rgba(20, 20, 40, 0.9);
+  padding: 40px;
+  border: 1px solid #4e4e8e;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(0, 100, 255, 0.2);
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  gap: 15px;
-  box-sizing: border-box;
+  flex-direction: column;
+  min-height: 550px; 
 }
 
-.footer-content {
-  display: contents;
-}
-
-/* Ensure the EXE and REF anchors stay distinct */
-.taper-footer span {
-  white-space: nowrap;
-}
-
-/* Specific alignment to mirror the Taper Project site */
-.taper-footer span:nth-child(1) {
-  text-align: left;
-}
-.taper-footer span:nth-child(2) {
-  text-align: left;
-}
-.taper-footer span:nth-child(3) {
-  text-align: center;
-}
-.taper-footer span:nth-child(4) {
-  text-align: right;
-}
-
-.taper-footer a {
-  color: #a0c0ff;
-  text-decoration: none;
-  border-bottom: 1px dotted #a0c0ff;
-}
-
-.taper-footer a:hover {
-  background: #a0c0ff;
-  color: #0d0d1a;
-}
-
-.support-links {
-  text-align: center;
-  font-weight: bold;
-  white-space: nowrap;
-}
+/* --- MOBILE SCALING (Keep this separate) --- */
 @media (max-width: 768px) {
   .taper-footer {
-    justify-content: center; /* Centers items when they stack */
+    justify-content: center;
     text-align: center;
     padding: 15px;
   }
   
   .taper-footer span {
-    width: 100%; /* Forces items onto new lines if needed */
+    width: 100%;
     margin-bottom: 5px;
   }
 
@@ -235,9 +176,9 @@ h1 {
     margin-bottom: 180px; 
   }
 
-.converter-box {
+  .converter-box {
     padding: 30px;
-    min-height: 480px; /* Reduced floor for mobile devices */
+    min-height: 480px;
   }
 
   .era-sidebar {
@@ -260,14 +201,61 @@ h1 {
   .title-app {
     font-size: 1.2rem;
   }
+  
+  .denied-l2 { font-size: 1.8rem; }
+  .denied-l3 { font-size: 0.9rem; }
+}
 
-  .timeline-box h3 {
-    font-size: 0.9rem;
-  }
+/* --- TIMELINE LIST HANDLING (GLOBAL - Applies to all screens) --- */
+/* This is now OUTSIDE the media query, so it works on desktop too */
 
-  #timeline-event {
-    font-size: 0.85rem;
-  }
+#timeline-event {
+  /* 1. FONT SWAP: Switches from Cinzel to a clean, readable UI font */
+  font-family: "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.95rem; 
+  font-weight: 400;
+  
+  /* 2. ALIGNMENT: Left-aligns the text block */
+  text-align: left; 
+  
+  /* Color tweak: slightly brighter than before for readability */
+  color: #e0e0ff; 
+  margin-top: 15px;
+}
+
+#timeline-event ul {
+  list-style: none; 
+  padding: 0;
+  margin: 0;
+}
+
+#timeline-event li {
+  position: relative;
+  /* 3. HANGING INDENT: Pushes text over to make room for the chevron */
+  padding-left: 20px; 
+  margin-bottom: 10px;
+  line-height: 1.5; 
+}
+
+/* 4. THE CHEVRON */
+#timeline-event li::before {
+  content: "❯"; /* Sharp, geometric right-facing chevron */
+  position: absolute;
+  left: 0;
+  top: 1px; 
+  color: #a0c0ff; 
+  font-size: 0.9em;
+  font-family: Arial, sans-serif; 
+}
+
+.timeline-box h3 {
+  margin-top: 0;
+  color: #ffcccc; /* Soft red header */
+  text-transform: uppercase;
+  font-size: 1rem;
+  border-bottom: 1px solid #8e4e4e;
+  padding-bottom: 5px;
+  margin-bottom: 15px; /* Adds space between header and text */
 }
 
 /* --- ACCORD NEXUS: ACCESS DENIED --- */
@@ -281,30 +269,25 @@ h1 {
   animation: pulse-red 2s infinite;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centering for Line 2 */
+  align-items: center; 
 }
 
 .denied-l1 {
   font-size: 1.1rem;
   font-weight: 700;
-  text-transform: uppercase; /* L1 is CAP anchor */
+  text-transform: uppercase;
 }
 
 .denied-l2 {
-  font-size: 2.5rem; /* Largest centered element */
+  font-size: 2.5rem; 
   font-weight: 700;
   margin: 5px 0;
 }
 
 .denied-l3 {
   font-size: 1rem;
-  font-weight: 400; /* Lighter weight as requested */
+  font-weight: 400; 
   margin-top: 10px;
-}
-
-@media (max-width: 768px) {
-  .denied-l2 { font-size: 1.8rem; }
-  .denied-l3 { font-size: 0.9rem; }
 }
 
 #output.denied {
@@ -318,45 +301,3 @@ h1 {
   100% { opacity: 1; }
 }
 
-.converter-box {
-  flex: 2;
-  background: rgba(20, 20, 40, 0.9);
-  padding: 40px;
-  border: 1px solid #4e4e8e;
-  border-radius: 12px;
-  text-align: center;
-  box-shadow: 0 0 30px rgba(0, 100, 255, 0.2);
-
-  /* SURGICAL ADDITION: Enables the 'Push' logic */
-  display: flex;
-  flex-direction: column;
-  min-height: 550px; /* Ensures there is a 'floor' to push toward */
-}
-
-.timeline-box {
-  background: rgba(40, 20, 20, 0.4);
-  padding: 15px;
-  border: 1px solid #8e4e4e;
-  border-radius: 8px;
-  box-shadow: 0 0 15px rgba(255, 100, 100, 0.1);
-
-  /* SURGICAL ADDITION: Pushes the box to the absolute bottom */
-  margin-top: auto; 
-  margin-bottom: 0;
-}
-
-.timeline-box h3 {
-  margin-top: 0;
-  color: #ffcccc;
-  text-transform: uppercase;
-  font-size: 1rem;
-  border-bottom: 1px solid #8e4e4e;
-  padding-bottom: 5px;
-}
-
-#timeline-event {
-  font-style: italic;
-  font-size: 0.9rem;
-  line-height: 1.4;
-  color: #f0d0d0;
-}

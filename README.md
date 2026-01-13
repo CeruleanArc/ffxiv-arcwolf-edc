@@ -1,15 +1,9 @@
-<a id="top"></a>
-
-![The FFXIV-Arcwolf Eorzean Date Converter, by Ellis Cú Anann Arcwolf](edc.png)
-# [The FFXIV-Arcwolf Eorzean Date Converter](https://edc.jijivisa.org)
-I made an app. It was *hard!* I'm *tired*. Some of y'all do this for work? That's so cool. It was kind of a blast, working on all this. Like many blasts, it *did* leave me with a headache, but AAAH! I made an app! I am quite proud of myself.
+![The FFXIV-Arcwolf Eorzean Date Converter v2](edcv2.png)
+# The FFXIV-Arcwolf Eorzean Date Converter
 ## What Is it?
-A lightweight, Vanilla JavaScript Progressive Web App (PWA) designed to solve the "Time Bubble" problem in Final Fantasy XIV roleplay using the magics of in-game lore, evolutionary psychology, the neurology of memory, temporal physics, and maths. Lots of maths.
-
-Unlike standard converters that rely on arbitrary ratios, the **FFXIV-Arcwolf EDC** implements my very own, very special **Lived Chronology Protocol**. It enforces a 1:1 isochronal (i.e. meaning "takes the same length of time to elapse") mapping between Earth time and Etheiryan time, ensuring that one second on Earth equals one second on Etheirys. It features:
-* **Zero Dependencies**: Runs on raw, high-performance JavaScript with no frameworks.
-* **Privacy-First**: All calculations happen locally on your device; trust me, I do *not* want to catch anyone's data cooties. Yuck.
-* **PWA Standard**: Installable on Android and iOS devices directly from the browser for an app-like experience; I support all experiences.
+A lightweight, Vanilla JavaScript-based Eorzean Date Converter (EDC) implementing custom temporal-mapping algorithms. Features a responsive terminal-style UI, real-time synchronization, and local persistence. Developed to standardize date-tracking within complex narrative frameworks.
+* **Ellis Arcwolf** programmed the app.
+* **Altari Arulaq** compiled Eorzean timeline data!
 ## Where Is it?
 You can access the live, secure tool here: [**The FFXIV-Arcwolf Eorzean Date Converter v1.5**](https://edc.jijivisa.org)
 * **For Users**: Just visit the link. On mobile devices, tap "Add to Home Screen" to install it as a standalone app.
