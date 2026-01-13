@@ -1,9 +1,9 @@
+/* --- GLOBAL LAYOUT & RESET --- */
 body {
   margin: 0;
   display: flex;
-  justify-content: center;
-  /* Change this to flex-start so content starts at the top */
-  align-items: flex-start; 
+  flex-direction: column; /* FIX: Stacks App on top of Footer */
+  align-items: center;    /* FIX: Centers everything horizontally */
   min-height: 100vh;
   color: #e0e0ff;
   font-family: "Cinzel", serif;
@@ -15,77 +15,32 @@ body {
   background-attachment: fixed;
 }
 
-input[type="date"] {
-  display: block; /* SURGICAL FIX: Allows centering */
-  margin: 20px auto 30px auto; /* Centered with top/bottom gutters */
-  background: #0f0f1f;
-  color: #fff;
-  border: 1px solid #4e4e8e;
-  padding: 12px 20px;
-  border-radius: 4px;
-  font-family: inherit; /* Ensures it uses Cinzel if supported */
-  width: 200px; /* Uniform width for better visual grounding */
-  text-align: center;
-  
-  /* Standard blue-glow iconography */
-  color-scheme: dark;
-  accent-color: #a0c0ff;
-}
-
-/* Specifically targeting the calendar icon's filter for the blue glow */
-input[type="date"]::-webkit-calendar-picker-indicator {
-  cursor: pointer;
-  filter: invert(80%) sepia(20%) saturate(1000%) hue-rotate(180deg)
-    brightness(110%);
-}
-
-/* --- Tiered Header Hierarchy --- */
-h1 {
-  line-height: 1.1; /* Tighter spacing for the tiered look */
-  margin-top: 0;
+#app {
+  width: 100%;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: center;
 }
 
-.title-the {
-  font-size: 1.2rem; /* Smallest: Leave as-is anchor */
-  font-weight: 400;
-}
-
-.title-brand {
-  font-size: 3.5rem; /* Largest: The Hero Line */
-  font-weight: 700;
-  white-space: nowrap; /* Forces one line */
-  letter-spacing: 2px;
-}
-
-.title-app {
-  font-size: 2rem; /* Middlest: Between 'The' and 'Brand' */
-  font-weight: 500;
-  white-space: nowrap; /* Forces one line */
-  color: #a0c0ff; /* Subtle blue shift to differentiate */
-}
-
-/* Mobile Scaling for One-Line Integrity */
-@media (max-width: 768px) {
-  .title-brand {
-    font-size: 2.4rem; /* Scaled down to fit mobile width */
-  }
-  .title-app {
-    font-size: 1.2rem;
-  }
-  .title-the {
-    font-size: 0.9rem;
-  }
-}
-
+/* --- MAIN CONTAINER & STRUCTURE --- */
 .main-container {
   display: flex;
   gap: 20px;
   max-width: 900px;
-  width: 90%; /* Creates healthy side gutters */
-  margin: 40px auto 120px auto; /* Adds top margin and bottom buffer for footer */
+  width: 90%; 
+  margin: 60px auto 40px auto; /* Top spacing for breathing room */
+}
+
+.converter-box {
+  flex: 2;
+  background: rgba(20, 20, 40, 0.9);
+  padding: 40px;
+  border: 1px solid #4e4e8e;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(0, 100, 255, 0.2);
+  display: flex;
+  flex-direction: column;
+  min-height: 550px; 
 }
 
 .era-sidebar {
@@ -96,6 +51,7 @@ h1 {
   border-radius: 12px;
   font-size: 0.9rem;
   text-align: left;
+  height: fit-content;
 }
 
 .era-item {
@@ -110,19 +66,68 @@ h1 {
   margin-bottom: 5px;
 }
 
+/* --- TYPOGRAPHY & HEADERS --- */
+h1 {
+  line-height: 1.1; 
+  margin-top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title-the {
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+
+.title-brand {
+  font-size: 3.5rem;
+  font-weight: 700;
+  white-space: nowrap;
+  letter-spacing: 2px;
+}
+
+.title-app {
+  font-size: 2rem;
+  font-weight: 500;
+  white-space: nowrap;
+  color: #a0c0ff;
+}
+
+/* --- INPUTS & OUTPUTS --- */
+input[type="date"] {
+  display: block;
+  margin: 20px auto 30px auto;
+  background: #0f0f1f;
+  color: #fff;
+  border: 1px solid #4e4e8e;
+  padding: 12px 20px;
+  border-radius: 4px;
+  font-family: inherit;
+  width: 200px;
+  text-align: center;
+  color-scheme: dark;
+  accent-color: #a0c0ff;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  filter: invert(80%) sepia(20%) saturate(1000%) hue-rotate(180deg) brightness(110%);
+}
+
 #output {
   display: flex;
   flex-direction: column;
   gap: 15px;
   line-height: 1.4;
-  margin: 30px auto; /* Centered anchor */
+  margin: 30px auto;
   padding: 25px 40px;
-  background: rgba(15, 15, 30, 0.7); /* Translucent deep blue */
-  border: 1px solid rgba(160, 192, 255, 0.4); /* Subtle blue glow frame */
+  background: rgba(15, 15, 30, 0.7);
+  border: 1px solid rgba(160, 192, 255, 0.4);
   border-radius: 8px;
-  width: fit-content; /* Shrinks to text size */
+  width: fit-content;
   min-width: 300px;
-  max-width: 90%; /* Prevents edge-touching on mobile */
+  max-width: 90%;
   box-shadow: 0 0 20px rgba(0, 100, 255, 0.15);
   text-align: center;
 }
@@ -141,84 +146,12 @@ h1 {
   letter-spacing: 2px;
 }
 
-.converter-box {
-  flex: 2;
-  background: rgba(20, 20, 40, 0.9);
-  padding: 40px;
-  border: 1px solid #4e4e8e;
-  border-radius: 12px;
-  text-align: center;
-  box-shadow: 0 0 30px rgba(0, 100, 255, 0.2);
-  display: flex;
-  flex-direction: column;
-  min-height: 550px; 
-}
-
-/* --- MOBILE SCALING (Keep this separate) --- */
-@media (max-width: 768px) {
-  .taper-footer {
-    justify-content: center;
-    text-align: center;
-    padding: 15px;
-  }
-  
-  .taper-footer span {
-    width: 100%;
-    margin-bottom: 5px;
-  }
-
-  .main-container {
-    flex-direction: column;
-    align-items: center;
-    gap: 30px;
-    margin-top: 20px;
-    width: 92%;
-    margin-bottom: 180px; 
-  }
-
-  .converter-box {
-    padding: 30px;
-    min-height: 480px;
-  }
-
-  .era-sidebar {
-    width: 100%;
-    flex: none;
-    padding: 20px;
-    box-sizing: border-box;
-    text-align: left;
-  }
-
-  h1 {
-    font-size: 1.6rem;
-    line-height: 2.2rem;
-  }
-
-  .title-brand {
-    font-size: 2.2rem;
-  }
-
-  .title-app {
-    font-size: 1.2rem;
-  }
-  
-  .denied-l2 { font-size: 1.8rem; }
-  .denied-l3 { font-size: 0.9rem; }
-}
-
-/* --- TIMELINE LIST HANDLING (GLOBAL - Applies to all screens) --- */
-/* This is now OUTSIDE the media query, so it works on desktop too */
-
+/* --- TIMELINE LIST HANDLING (The New Stuff) --- */
 #timeline-event {
-  /* 1. FONT SWAP: Switches from Cinzel to a clean, readable UI font */
   font-family: "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
   font-size: 0.95rem; 
   font-weight: 400;
-  
-  /* 2. ALIGNMENT: Left-aligns the text block */
   text-align: left; 
-  
-  /* Color tweak: slightly brighter than before for readability */
   color: #e0e0ff; 
   margin-top: 15px;
 }
@@ -231,15 +164,13 @@ h1 {
 
 #timeline-event li {
   position: relative;
-  /* 3. HANGING INDENT: Pushes text over to make room for the chevron */
   padding-left: 20px; 
   margin-bottom: 10px;
   line-height: 1.5; 
 }
 
-/* 4. THE CHEVRON */
 #timeline-event li::before {
-  content: "❯"; /* Sharp, geometric right-facing chevron */
+  content: "❯"; 
   position: absolute;
   left: 0;
   top: 1px; 
@@ -250,12 +181,12 @@ h1 {
 
 .timeline-box h3 {
   margin-top: 0;
-  color: #ffcccc; /* Soft red header */
+  color: #ffcccc;
   text-transform: uppercase;
   font-size: 1rem;
   border-bottom: 1px solid #8e4e4e;
   padding-bottom: 5px;
-  margin-bottom: 15px; /* Adds space between header and text */
+  margin-bottom: 15px;
 }
 
 /* --- ACCORD NEXUS: ACCESS DENIED --- */
@@ -272,23 +203,9 @@ h1 {
   align-items: center; 
 }
 
-.denied-l1 {
-  font-size: 1.1rem;
-  font-weight: 700;
-  text-transform: uppercase;
-}
-
-.denied-l2 {
-  font-size: 2.5rem; 
-  font-weight: 700;
-  margin: 5px 0;
-}
-
-.denied-l3 {
-  font-size: 1rem;
-  font-weight: 400; 
-  margin-top: 10px;
-}
+.denied-l1 { font-size: 1.1rem; font-weight: 700; text-transform: uppercase; }
+.denied-l2 { font-size: 2.5rem; font-weight: 700; margin: 5px 0; }
+.denied-l3 { font-size: 1rem; font-weight: 400; margin-top: 10px; }
 
 #output.denied {
   border-color: #ff3333;
@@ -301,3 +218,60 @@ h1 {
   100% { opacity: 1; }
 }
 
+/* --- FOOTER STYLES (RESTORED) --- */
+.taper-footer {
+  width: 100%;
+  padding: 20px 0 40px 0;
+  font-size: 0.7rem;
+  color: #6a6a8a;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: center;
+  margin-top: auto; /* Pushes footer to bottom */
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.footer-content a {
+  color: #8a8ab5;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-content a:hover {
+  color: #a0c0ff;
+}
+
+/* --- MOBILE SCALING --- */
+@media (max-width: 768px) {
+  .main-container {
+    flex-direction: column;
+    align-items: center;
+    width: 92%;
+    margin-top: 20px;
+    margin-bottom: 40px;
+  }
+  
+  .converter-box {
+    padding: 30px;
+    min-height: 480px;
+  }
+  
+  .era-sidebar {
+    width: 100%;
+    text-align: left;
+    margin-bottom: 20px;
+  }
+  
+  h1 { font-size: 1.6rem; line-height: 2.2rem; }
+  .title-brand { font-size: 2.2rem; }
+  .title-app { font-size: 1.2rem; }
+  .title-the { font-size: 0.9rem; }
+  
+  .denied-l2 { font-size: 1.8rem; }
+}
