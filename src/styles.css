@@ -27,7 +27,7 @@ body {
   gap: 20px;
   max-width: 900px;
   width: 90%; 
-  margin: 60px auto 120px auto; /* Added bottom margin to clear the footer */
+  margin: 60px auto 120px auto; 
 }
 
 .converter-box {
@@ -148,7 +148,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 /* --- TIMELINE LIST HANDLING --- */
 #timeline-event {
-  font-family: "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
+  /* FONT REMOVED: Now inherits Cinzel from body */
   font-size: 0.95rem; 
   font-weight: 400;
   text-align: left; 
@@ -218,8 +218,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   100% { opacity: 1; }
 }
 
-/* --- THE TAPER FOOTER (RESTORED) --- */
+/* --- THE TAPER FOOTER (CORRECTED FONT) --- */
 .taper-footer {
+  font-family: "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif; /* APPLIED HERE */
   width: 100%;
   background: rgba(10, 10, 20, 0.9);
   border-top: 1px solid #4e4e8e;
@@ -228,7 +229,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   bottom: 0;
   left: 0;
   z-index: 1000;
-  box-sizing: border-box; /* Ensures padding doesn't break width */
+  box-sizing: border-box; 
 }
 
 .footer-content {
@@ -264,7 +265,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     align-items: center;
     width: 92%;
     margin-top: 20px;
-    margin-bottom: 80px; /* Space for mobile footer */
+    margin-bottom: 80px;
   }
   
   .converter-box {
@@ -285,7 +286,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   
   .denied-l2 { font-size: 1.8rem; }
   
-  /* Mobile Footer Adjustments to prevent squishing */
   .taper-footer {
     padding: 10px;
   }
