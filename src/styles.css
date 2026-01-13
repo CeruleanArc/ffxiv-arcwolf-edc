@@ -218,33 +218,42 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   100% { opacity: 1; }
 }
 
-/* --- FOOTER STYLES (RESTORED) --- */
+/* --- THE TAPER RECOVERY --- */
 .taper-footer {
   width: 100%;
-  padding: 20px 0 40px 0;
-  font-size: 0.7rem;
-  color: #6a6a8a;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  text-align: center;
-  margin-top: auto; /* Pushes footer to bottom */
+  background: rgba(10, 10, 20, 0.9);
+  border-top: 1px solid #4e4e8e;
+  padding: 10px 40px; /* Restores the horizontal breathing room */
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
 }
 
 .footer-content {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between; /* Restores the 'Tapered' spread */
   align-items: center;
-  gap: 6px;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  color: #8e8eb2;
+}
+
+.footer-content span {
+  white-space: nowrap;
 }
 
 .footer-content a {
-  color: #8a8ab5;
+  color: #a0c0ff;
   text-decoration: none;
-  transition: color 0.2s;
+  transition: color 0.3s ease;
 }
 
 .footer-content a:hover {
-  color: #a0c0ff;
+  color: #ffffff;
+  text-shadow: 0 0 8px #a0c0ff;
 }
 
 /* --- MOBILE SCALING --- */
