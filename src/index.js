@@ -17,6 +17,29 @@ const EORZEAN_TIMELINE = {
     "The Autumn War begins as Ala Mhigo invades the Black Shroud.",
     "Gridania and its allies eventually prevail."
   ],
+  "6AE-1500": [
+    "Ketenramm Blaufystsyn returns to Limsa Lominsa from the New World."
+  ],
+  "6AE-1501": [
+    "Word of Ketenramm's miraculous discovery spreads across the city-state, and more and more Lominsans set sail in search of glory and riches in the The New World, ushering in a golden age of exploration.",
+    "These voyages are met with difficulties—shipwrecks in the rough western seas, ambushes by the Sahagin of the Indigo Deep—and the docks and alehouses of the capital are abuzz with tales of fortune and woe.",
+    "The starglobe Atlas is built as a recreation based on sketches of Lewphon, the father of Sharlayan astromancy."
+  ],
+  "6AE-1502": [
+    "Word of Ketenramm's miraculous discovery spreads across the city-state, and more and more Lominsans set sail in search of glory and riches in the The New World, ushering in a golden age of exploration.",
+    "These voyages are met with difficulties—shipwrecks in the rough western seas, ambushes by the Sahagin of the Indigo Deep—and the docks and alehouses of the capital are abuzz with tales of fortune and woe.",
+    "The starglobe Atlas is built as a recreation based on sketches of Lewphon, the father of Sharlayan astromancy."
+  ],
+  "6AE-1503": [
+    "Word of Ketenramm's miraculous discovery spreads across the city-state, and more and more Lominsans set sail in search of glory and riches in the The New World, ushering in a golden age of exploration.",
+    "These voyages are met with difficulties—shipwrecks in the rough western seas, ambushes by the Sahagin of the Indigo Deep—and the docks and alehouses of the capital are abuzz with tales of fortune and woe.",
+    "The starglobe Atlas is built as a recreation based on sketches of Lewphon, the father of Sharlayan astromancy."
+  ],
+  "6AE-1504": [
+    "Word of Ketenramm's miraculous discovery spreads across the city-state, and more and more Lominsans set sail in search of glory and riches in the The New World, ushering in a golden age of exploration.",
+    "These voyages are met with difficulties—shipwrecks in the rough western seas, ambushes by the Sahagin of the Indigo Deep—and the docks and alehouses of the capital are abuzz with tales of fortune and woe.",
+    "The starglobe Atlas is built as a recreation based on sketches of Lewphon, the father of Sharlayan astromancy."
+  ],
   "6AE-1521": [
     "The Garlean Empire is founded under Solus zos Galvus."
   ],
