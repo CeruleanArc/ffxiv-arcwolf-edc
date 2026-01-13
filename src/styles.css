@@ -302,9 +302,14 @@ h1 {
   font-family: Arial, sans-serif; /* Ensures the chevron symbol renders cleanly */
 }
 
-  .timeline-box h3 {
-    font-size: 0.9rem;
-  }
+.timeline-box h3 {
+  margin-top: 0;
+  color: #ffcccc;
+  text-transform: uppercase;
+  font-size: 1rem;
+  border-bottom: 1px solid #8e4e4e;
+  padding-bottom: 5px;
+}
 
 /* --- ACCORD NEXUS: ACCESS DENIED --- */
 .denied-message {
@@ -369,30 +374,3 @@ h1 {
   min-height: 550px; /* Ensures there is a 'floor' to push toward */
 }
 
-.timeline-box {
-  background: rgba(40, 20, 20, 0.4);
-  padding: 15px;
-  border: 1px solid #8e4e4e;
-  border-radius: 8px;
-  box-shadow: 0 0 15px rgba(255, 100, 100, 0.1);
-
-  /* SURGICAL ADDITION: Pushes the box to the absolute bottom */
-  margin-top: auto; 
-  margin-bottom: 0;
-}
-
-.timeline-box h3 {
-  margin-top: 0;
-  color: #ffcccc;
-  text-transform: uppercase;
-  font-size: 1rem;
-  border-bottom: 1px solid #8e4e4e;
-  padding-bottom: 5px;
-}
-
-#timeline-event {
-  font-style: italic;
-  font-size: 0.9rem;
-  line-height: 1.4;
-  color: #f0d0d0;
-}
